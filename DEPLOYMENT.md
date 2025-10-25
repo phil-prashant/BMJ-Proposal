@@ -31,11 +31,11 @@ In the "Environment" section, add the following environment variables:
 
 | Key | Value |
 |-----|-------|
-| `RESEND_API_KEY` | `re_73miNRj6_83vuf1KSmVNeiAwBM1U37jtN` |
-| `EMAILJS_SERVICE_ID` | `service_kkb35zr` |
+| `RESEND_API_KEY` | Your Resend API key (obtain from project requirements) |
+| `EMAILJS_SERVICE_ID` | Your EmailJS Service ID (obtain from project requirements) |
 | `PYTHON_VERSION` | `3.12.3` |
 
-**Note**: The `RESEND_API_KEY` and `EMAILJS_SERVICE_ID` values are provided in the problem statement. Make sure to keep these secure.
+**Important**: Obtain the actual API key values from your project documentation or administrator. Set these values directly in the Render.com dashboard under the Environment section. Never commit API keys to version control.
 
 ### 4. Deploy
 
