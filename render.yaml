@@ -3,7 +3,8 @@ services:
     name: bmj-proposal-backend
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    healthCheckPath: /health
     envVars:
       - key: RESEND_API_KEY
         value: re_73miNRj6_83vuf1KSmVNeiAwBM1U37jtN
