@@ -1,419 +1,1425 @@
-# BMJ-Machinery Proposal Email Server
-# Handles email sending via Resend with EmailJS fallback
-
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import requests
-import base64
-from io import BytesIO
-import json
-from datetime import datetime
-import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-
-app = Flask(__name__)
-CORS(app)
-
-# API Keys
-RESEND_API_KEY = os.getenv('RESEND_API_KEY', 're_73miNRj6_83vuf1KSmVNeiAwBM1U37jtN')
-EMAILJS_SERVICE_ID = os.getenv('EMAILJS_SERVICE_ID', 'service_kkb35zr')
-EMAILJS_TEMPLATE_ID = os.getenv('EMAILJS_TEMPLATE_ID', 'template_dbqjamx')
-EMAILJS_PUBLIC_KEY = os.getenv('EMAILJS_PUBLIC_KEY', 'lWcX2ZAuSeQUVvyNk')
-
-RESEND_ENDPOINT = "https://api.resend.com/emails"
-EMAILJS_ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send"
-
-print("="*60)
-print("BMJ-Machinery Proposal Email Server")
-print("="*60)
-print(f"✓ Resend API Key loaded: {RESEND_API_KEY[:10]}...")
-print(f"✓ EmailJS Service ID: {EMAILJS_SERVICE_ID}")
-print(f"✓ CORS enabled")
-print("="*60)
-
-@app.route('/health', methods=['GET'])
-def health_check():
-    """Health check endpoint"""
-    return jsonify({
-        'status': 'healthy',
-        'timestamp': datetime.now().isoformat(),
-        'service': 'BMJ-Machinery Email Server'
-    })
-
-@app.route('/api/send-email', methods=['POST', 'OPTIONS'])
-def send_email():
-    """
-    Send proposal email
-    
-    Request body:
-    {
-        "recipientEmail": "recipient@example.com",
-        "proposalData": {
-            "packageName": "Growth Accelerator",
-            "monthlyTotal": 5985,
-            "firstPayment": 10645,
-            "paymentTerm": "Quarterly",
-            "discount": 5,
-            "addOns": ["Analytics", "Copywriter"],
-            "leads": "15-20",
-            "meetings": "8-12",
-            "traffic": "30-40%"
-        }
-    }
-    """
-    if request.method == 'OPTIONS':
-        return '', 204
-    
-    try:
-        data = request.json
-        recipient_email = data.get('recipientEmail', '').strip()
-        proposal_data = data.get('proposalData', {})
-        
-        # Validate email
-        if not recipient_email or '@' not in recipient_email:
-            return jsonify({
-                'success': False,
-                'message': 'Invalid recipient email address'
-            }), 400
-        
-        print(f"\n📧 Email Request: {recipient_email}")
-        print(f"📦 Package: {proposal_data.get('packageName')}")
-        
-        # Try Resend first
-        print("→ Attempting Resend...")
-        resend_result = send_via_resend(recipient_email, proposal_data)
-        
-        if resend_result['success']:
-            print(f"✓ Success via Resend!\n")
-            return jsonify(resend_result), 200
-        
-        # Fallback to EmailJS
-        print("→ Resend failed, attempting EmailJS fallback...")
-        emailjs_result = send_via_emailjs(recipient_email, proposal_data)
-        
-        if emailjs_result['success']:
-            print(f"✓ Success via EmailJS (fallback)!\n")
-            return jsonify(emailjs_result), 200
-        
-        # Both failed
-        print(f"✗ Both services failed\n")
-        return jsonify({
-            'success': False,
-            'message': 'Failed to send email via both services',
-            'resend_error': resend_result.get('error'),
-            'emailjs_error': emailjs_result.get('error')
-        }), 500
-    
-    except Exception as e:
-        print(f"✗ Server error: {str(e)}\n")
-        return jsonify({
-            'success': False,
-            'message': f'Server error: {str(e)}',
-            'error': str(e)
-        }), 500
-
-def send_via_resend(recipient_email, proposal_data):
-    """Send email via Resend API (Primary service)"""
-    try:
-        # Build email body
-        email_body = build_email_body(proposal_data)
-        
-        # Build headers
-        headers = {
-            "Authorization": f"Bearer {RESEND_API_KEY}",
-            "Content-Type": "application/json"
-        }
-        
-        # Build payload
-        payload = {
-            "from": "NeoticAI Team <prashant@neoticai.com>",
-            "to": recipient_email,
-            "subject": f"Custom Marketing Proposal for BMJ-Machinery - {proposal_data.get('packageName', 'Proposal')}",
-            "html": email_body,
-            "reply_to": "prashant@neoticai.com"
-        }
-        
-        print(f"  Sending to: {recipient_email}")
-        print(f"  Subject: {payload['subject']}")
-        
-        # Make request
-        response = requests.post(
-            RESEND_ENDPOINT,
-            json=payload,
-            headers=headers,
-            timeout=10
-        )
-        
-        print(f"  Status: {response.status_code}")
-        
-        if response.status_code == 200:
-            response_data = response.json()
-            return {
-                'success': True,
-                'message': 'Email sent successfully via Resend!',
-                'service': 'resend',
-                'email_id': response_data.get('id'),
-                'recipient': recipient_email
-            }
-        else:
-            print(f"  Error: {response.text[:200]}")
-            return {
-                'success': False,
-                'error': response.text,
-                'status_code': response.status_code
-            }
-    
-    except requests.exceptions.Timeout:
-        return {
-            'success': False,
-            'error': 'Resend API timeout'
-        }
-    except Exception as e:
-        print(f"  Exception: {str(e)}")
-        return {
-            'success': False,
-            'error': str(e)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMJ-Machinery Marketing Proposal</title>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.emailjs.com/sdk/3.10.0/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-def send_via_emailjs(recipient_email, proposal_data):
-    """Send email via EmailJS API (Fallback service)"""
-    try:
-        # Build email body
-        email_body = build_email_body(proposal_data)
-        
-        # EmailJS payload format
-        payload = {
-            "service_id": EMAILJS_SERVICE_ID,
-            "template_id": EMAILJS_TEMPLATE_ID,
-            "user_id": EMAILJS_PUBLIC_KEY,
-            "template_params": {
-                "from_email": "prashant@neoticai.com",
-                "from_name": "NeoticAI Team",
-                "to_email": recipient_email,
-                "to_name": "Chi Feng",
-                "subject": f"Custom Marketing Proposal for BMJ-Machinery - {proposal_data.get('packageName', 'Proposal')}",
-                "email_body": email_body,
-                "package_name": proposal_data.get('packageName', 'N/A'),
-                "monthly_total": f"${proposal_data.get('monthlyTotal', '0')}",
-                "first_payment": f"${proposal_data.get('firstPayment', '0')}",
-                "payment_term": proposal_data.get('paymentTerm', 'Monthly'),
-                "discount": f"{proposal_data.get('discount', '0')}%",
-                "leads": proposal_data.get('leads', '15-20'),
-                "meetings": proposal_data.get('meetings', '8-12'),
-                "traffic": proposal_data.get('traffic', '30-40%')
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Sticky Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 16px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-left {
+            color: white;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #06b6d4;
+        }
+
+        .header-metrics {
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-top: 4px;
+        }
+
+        .header-metrics span {
+            margin-right: 16px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-btn {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .clear-btn {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            display: none;
+        }
+
+        .clear-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .clear-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .email-btn {
+            background: #ea580c;
+            color: white;
+            border: none;
+        }
+
+        .email-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .email-btn:not(:disabled) {
+            animation: pulse 2s infinite;
+        }
+
+        .email-btn:not(:disabled):hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(234, 88, 12, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(234, 88, 12, 0); }
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 40px 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-section h2 {
+            color: #0f172a;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .intro-section p {
+            color: #475569;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .instructions {
+            background: #f0f9ff;
+            border-left: 4px solid #06b6d4;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        .instructions h4 {
+            color: #0c4a6e;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #475569;
+            font-size: 13px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        /* Packages Section */
+        .packages-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 1024px) {
+            .packages-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
-        
-        print(f"  Sending to: {recipient_email}")
-        print(f"  Subject: {payload['template_params']['subject']}")
-        
-        # Make request
-        response = requests.post(
-            EMAILJS_ENDPOINT,
-            json=payload,
-            timeout=10
-        )
-        
-        print(f"  Status: {response.status_code}")
-        
-        if response.status_code == 200:
-            return {
-                'success': True,
-                'message': 'Email sent successfully via EmailJS!',
-                'service': 'emailjs',
-                'recipient': recipient_email
-            }
-        else:
-            print(f"  Error: {response.text[:200]}")
-            return {
-                'success': False,
-                'error': response.text,
-                'status_code': response.status_code
-            }
-    
-    except requests.exceptions.Timeout:
-        return {
-            'success': False,
-            'error': 'EmailJS API timeout'
-        }
-    except Exception as e:
-        print(f"  Exception: {str(e)}")
-        return {
-            'success': False,
-            'error': str(e)
+
+        .package-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-def build_email_body(proposal_data):
-    """Build professional HTML email body"""
-    
-    package_name = proposal_data.get('packageName', 'N/A')
-    monthly_total = proposal_data.get('monthlyTotal', 0)
-    first_payment = proposal_data.get('firstPayment', 0)
-    payment_term = proposal_data.get('paymentTerm', 'Monthly')
-    discount = proposal_data.get('discount', 0)
-    add_ons = proposal_data.get('addOns', [])
-    leads = proposal_data.get('leads', '15-20')
-    meetings = proposal_data.get('meetings', '8-12')
-    traffic = proposal_data.get('traffic', '30-40%')
-    
-    add_ons_html = ''
-    if add_ons:
-        add_ons_html = '<ul>' + ''.join([f'<li>{addon}</li>' for addon in add_ons]) + '</ul>'
-    
-    html_body = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <style>
-            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
-            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-            .header {{ background: #1a202c; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }}
-            .header h1 {{ margin: 0; font-size: 24px; }}
-            .section {{ background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #0891b2; }}
-            .section h2 {{ margin-top: 0; color: #1a202c; font-size: 16px; }}
-            .pricing {{ background: #e0f7ff; padding: 15px; border-radius: 8px; margin: 15px 0; }}
-            .pricing p {{ margin: 5px 0; font-size: 14px; }}
-            .price-highlight {{ font-size: 20px; font-weight: bold; color: #0891b2; margin: 10px 0; }}
-            .footer {{ text-align: center; color: #666; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; }}
-            ul {{ margin: 10px 0; padding-left: 20px; }}
-            li {{ margin: 5px 0; }}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>Custom Marketing Proposal</h1>
-                <p>For BMJ-Machinery</p>
-            </div>
-            
-            <p>Dear Eric / Chi Feng,</p>
-            
-            <p>Thank you for your interest in NeoticAI's marketing services. Please find below your custom proposal tailored specifically for BMJ-Machinery.</p>
-            
-            <div class="section">
-                <h2>📦 Selected Package</h2>
-                <p><strong>{package_name}</strong></p>
-                <p>Comprehensive lead generation and marketing foundation with integrated digital strategies.</p>
-            </div>
-            
-            <div class="pricing">
-                <p><strong>Package Details:</strong></p>
-                <p>Monthly Investment: <strong>${monthly_total:,.2f}</strong></p>
-                <p>Payment Term: <strong>{payment_term}</strong></p>
-                {f'<p>Discount Applied: <strong>{discount}%</strong></p>' if discount > 0 else ''}
-                <div class="price-highlight">First Payment: ${first_payment:,.2f}</div>
-            </div>
-            
-            {f'''<div class="section">
-                <h2>✨ Add-ons Included</h2>
-                {add_ons_html}
-            </div>''' if add_ons_html else ''}
-            
-            <div class="section">
-                <h2>📊 Expected Outcomes</h2>
-                <p>✓ <strong>{leads} qualified leads per month</strong></p>
-                <p>✓ <strong>{meetings} estimated meetings per month</strong></p>
-                <p>✓ <strong>{traffic} website traffic increase</strong></p>
-                <p>✓ Professional brand positioning</p>
-                <p>✓ Improved sales-ready prospects</p>
-            </div>
-            
-            <div class="section">
-                <h2>🎯 Next Steps</h2>
-                <p>1. Review this proposal thoroughly</p>
-                <p>2. Schedule a consultation call with our team</p>
-                <p>3. Finalize contract and payment terms</p>
-                <p>4. Kick-off your marketing transformation!</p>
-            </div>
-            
-            <p>We're excited to partner with BMJ-Machinery and drive meaningful growth for your business.</p>
-            
-            <div class="footer">
-                <p>NeoticAI Team</p>
-                <p>Email: prashant@neoticai.com</p>
-                <p>Website: www.neoticai.com</p>
-                <p style="margin-top: 15px; font-size: 11px;">© 2025 NeoticAI. All rights reserved.</p>
+        .package-card:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 12px 24px rgba(6, 182, 212, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .package-card input[type="radio"]:checked + .package-content {
+            color: #06b6d4;
+        }
+
+        .package-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .package-card input[type="radio"]:checked ~ .package-badge {
+            background: #06b6d4;
+            color: white;
+        }
+
+        .package-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0c4a6e;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .package-content {
+            transition: all 0.3s ease;
+        }
+
+        .package-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .package-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ea580c;
+            margin-bottom: 16px;
+        }
+
+        .package-content p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .package-features {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .package-features li {
+            padding: 8px 0;
+            color: #475569;
+            font-size: 13px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* Add-ons Section */
+        .addons-section {
+            margin-bottom: 50px;
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            .addons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .addon-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .addon-option:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.1);
+        }
+
+        .addon-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f1f5f9;
+        }
+
+        .addon-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 4px;
+            cursor: pointer;
+            accent-color: #06b6d4;
+            flex-shrink: 0;
+        }
+
+        .addon-checkbox:disabled {
+            cursor: not-allowed;
+            opacity: 0.4;
+        }
+
+        .addon-content {
+            flex: 1;
+        }
+
+        .addon-name {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .addon-description {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .addon-price {
+            color: #ea580c;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        /* Payment Terms */
+        .payment-terms {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .payment-terms h3 {
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .term-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .term-option:hover {
+            border-color: #06b6d4;
+        }
+
+        .term-option input[type="radio"] {
+            margin-right: 8px;
+            cursor: pointer;
+            accent-color: #06b6d4;
+        }
+
+        .term-option label {
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .term-discount {
+            font-size: 11px;
+            color: #06b6d4;
+            margin-left: 8px;
+            font-weight: 700;
+        }
+
+        /* Finalize Section */
+        .finalize-section {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .finalize-btn {
+            padding: 14px 32px;
+            background: #ea580c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .finalize-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .finalize-btn:not(:disabled):hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(234, 88, 12, 0.3);
+        }
+
+        /* Terms Section */
+        .terms-section {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .terms-section h3 {
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .terms-agreement {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: #f0f9ff;
+            border-radius: 8px;
+            border: 2px solid #e0f2fe;
+            margin-bottom: 24px;
+            animation: none;
+            transition: all 0.3s ease;
+        }
+
+        .terms-agreement.highlight {
+            background: #fef3c7;
+            border-color: #fcd34d;
+            animation: highlight-pulse 2s ease-in-out 3;
+        }
+
+        @keyframes highlight-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .terms-agreement input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #06b6d4;
+            flex-shrink: 0;
+        }
+
+        .terms-agreement label {
+            cursor: pointer;
+            font-weight: 600;
+            color: #0c4a6e;
+            font-size: 14px;
+        }
+
+        .terms-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .terms-subsection h4 {
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .terms-subsection ul {
+            list-style: none;
+            color: #475569;
+            font-size: 13px;
+        }
+
+        .terms-subsection li {
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .terms-subsection li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #06b6d4;
+            font-weight: bold;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: #0f172a;
+            font-size: 18px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #0f172a;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-summary {
+            background: #f0f9ff;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #0c4a6e;
+            line-height: 1.6;
+        }
+
+        .modal-summary p {
+            margin-bottom: 8px;
+        }
+
+        .modal-summary strong {
+            color: #0f172a;
+        }
+
+        .modal-input-group {
+            margin-bottom: 16px;
+        }
+
+        .modal-input-group label {
+            display: block;
+            color: #0f172a;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .modal-input-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-input-group input:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+
+        .modal-btn-cancel {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #cbd5e1;
+        }
+
+        .modal-btn-send {
+            background: #ea580c;
+            color: white;
+        }
+
+        .modal-btn-send:hover {
+            background: #dc2626;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0f172a;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            z-index: 3000;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            background: #10b981;
+        }
+
+        .toast.error {
+            background: #ef4444;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sticky-header {
+                padding: 12px 16px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-right {
+                width: 100%;
+                gap: 8px;
+            }
+
+            .header-btn {
+                flex: 1;
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .email-btn {
+                flex: 2;
+            }
+
+            main {
+                margin-top: 140px;
+                padding: 20px 16px;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .terms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .finalize-btn {
+                width: 100%;
+            }
+
+            .intro-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-metrics {
+                font-size: 11px;
+            }
+
+            .header-metrics span {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 4px;
+            }
+
+            .header-btn {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
+
+            main {
+                margin-top: 160px;
+                padding: 16px 12px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .package-card {
+                padding: 20px;
+            }
+
+            .addon-option {
+                padding: 16px;
+                gap: 12px;
+            }
+
+            .terms-content {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                border-radius: 8px;
+            }
+
+            .toast {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <div class="header-left">
+            <div class="header-title">BMJ-Machinery Marketing Proposal</div>
+            <div class="header-metrics">
+                <span>Total: <span id="header-total">Select package</span></span>
+                <span>Payment: <span id="header-payment">—</span></span>
+                <span>Prospects/Month: <span id="header-prospects">—</span></span>
             </div>
         </div>
-    </body>
-    </html>
-    """
-    
-    return html_body
+        <div class="header-right">
+            <button class="header-btn clear-btn" id="clear-btn" onclick="clearSelections()">🔄 Clear</button>
+            <button class="header-btn email-btn" id="email-btn-header" disabled onclick="openEmailModal()">📧 Email Proposal</button>
+        </div>
+    </header>
 
-@app.route('/api/test-email', methods=['POST'])
-def test_email():
-    """Test endpoint to send test email"""
-    try:
-        test_data = {
-            'recipientEmail': 'prashant.kay3@gmail.com',
-            'proposalData': {
-                'packageName': 'Growth Accelerator',
-                'monthlyTotal': 5985,
-                'firstPayment': 10645,
-                'paymentTerm': 'Quarterly',
-                'discount': 5,
-                'addOns': ['Analytics Dashboard', 'Dedicated Copywriter'],
-                'leads': '15-20',
-                'meetings': '8-12',
-                'traffic': '30-40%'
+    <main>
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <h2>Welcome, Eric / Chi Feng</h2>
+            <p>We've prepared this customized proposal builder for BMJ-Machinery. Follow the steps below to select packages, add-ons, and payment terms that best fit your business goals.</p>
+            
+            <div class="instructions">
+                <h4>📋 How to Use This Page:</h4>
+                <ol>
+                    <li><strong>Step 1 - Select a Base Package:</strong> Choose from three comprehensive marketing solutions tailored to your needs. Each package includes core services and support levels.</li>
+                    <li><strong>Step 2 - Customize with Add-ons:</strong> Enhance your package by selecting additional services like advanced analytics, dedicated copywriting, or press releases. Add-ons become available after selecting a base package.</li>
+                    <li><strong>Step 3 - Choose Payment Frequency:</strong> Select how you'd like to pay—Monthly, Quarterly, Semi-Annual, or Annual. Each longer commitment unlocks bonus discounts (5%, 10%, or 15%).</li>
+                    <li><strong>Step 4 - Review & Finalize:</strong> Click "Finalize Selections" to lock in your choices and enable the email proposal button.</li>
+                    <li><strong>Step 5 - Agree to Terms:</strong> Review the terms, assumptions, and commitments, then check the agreement box to enable email delivery.</li>
+                    <li><strong>Step 6 - Send Your Proposal:</strong> Click "Email Proposal" to send your customized proposal with PDF attachment via email.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Base Packages Section -->
+        <section class="packages-section">
+            <h2 class="section-title">1. Select Your Base Package</h2>
+            <div class="packages-grid">
+                <!-- Lead Generator Package -->
+                <label class="package-card">
+                    <input type="radio" name="basePackage" value="lead-generator" data-price="3500" data-name="Lead Generator" data-prospects="8-12" onchange="updateMetrics()">
+                    <span class="package-badge">Starter</span>
+                    <div class="package-content">
+                        <h3>Lead Generator</h3>
+                        <div class="package-price">$3,500/mo</div>
+                        <p>Perfect for businesses looking to generate consistent, qualified leads with proven conversion strategies.</p>
+                        <ul class="package-features">
+                            <li>SEO optimization for core keywords</li>
+                            <li>Content marketing (2 blogs/month)</li>
+                            <li>Social media management</li>
+                            <li>Basic analytics dashboard</li>
+                            <li>Email support</li>
+                            <li>Monthly strategy calls</li>
+                            <li>Setup fee: $1,500</li>
+                        </ul>
+                    </div>
+                </label>
+
+                <!-- Growth Accelerator Package -->
+                <label class="package-card">
+                    <input type="radio" name="basePackage" value="growth-accelerator" data-price="5500" data-name="Growth Accelerator" data-prospects="15-20" onchange="updateMetrics()">
+                    <span class="package-badge">Popular</span>
+                    <div class="package-content">
+                        <h3>Growth Accelerator</h3>
+                        <div class="package-price">$5,500/mo</div>
+                        <p>Our most popular package designed to rapidly scale your business with multi-channel marketing excellence.</p>
+                        <ul class="package-features">
+                            <li>Advanced SEO with technical optimization</li>
+                            <li>Content marketing (4 blogs/month)</li>
+                            <li>Paid advertising management (Google, Social)</li>
+                            <li>Advanced analytics & reporting</li>
+                            <li>Video content creation (2 videos/month)</li>
+                            <li>Dedicated account manager</li>
+                            <li>Bi-weekly strategy calls</li>
+                            <li>Setup fee: $2,000</li>
+                        </ul>
+                    </div>
+                </label>
+
+                <!-- Market Domination Package -->
+                <label class="package-card">
+                    <input type="radio" name="basePackage" value="market-domination" data-price="8900" data-name="Market Domination" data-prospects="25-35" onchange="updateMetrics()">
+                    <span class="package-badge">Premium</span>
+                    <div class="package-content">
+                        <h3>Market Domination</h3>
+                        <div class="package-price">$8,900/mo</div>
+                        <p>Our ultimate package for enterprise-level results with comprehensive market penetration and brand dominance.</p>
+                        <ul class="package-features">
+                            <li>Full-stack digital marketing ecosystem</li>
+                            <li>Premium SEO with enterprise optimization</li>
+                            <li>Content marketing (6 blogs/month)</li>
+                            <li>Multi-channel paid advertising</li>
+                            <li>Video production (4 videos/month)</li>
+                            <li>Influencer partnership coordination</li>
+                            <li>Custom integrations & APIs</li>
+                            <li>24/7 priority support</li>
+                            <li>Weekly strategy sessions</li>
+                            <li>Setup fee: $3,500</li>
+                        </ul>
+                    </div>
+                </label>
+            </div>
+        </section>
+
+        <!-- Add-ons Section -->
+        <section class="addons-section">
+            <h2 class="section-title">2. Customize with Add-ons</h2>
+            <div class="addons-grid">
+                <div class="addon-option disabled">
+                    <input type="checkbox" class="addon-checkbox" disabled data-addon-name="Advanced Analytics Dashboard" data-addon-price="800">
+                    <div class="addon-content">
+                        <div class="addon-name">Advanced Analytics Dashboard</div>
+                        <div class="addon-description">Real-time tracking of all marketing channels with custom reporting.</div>
+                        <div class="addon-price">+$800/mo</div>
+                    </div>
+                </div>
+
+                <div class="addon-option disabled">
+                    <input type="checkbox" class="addon-checkbox" disabled data-addon-name="Dedicated Copywriter" data-addon-price="1500">
+                    <div class="addon-content">
+                        <div class="addon-name">Dedicated Copywriter</div>
+                        <div class="addon-description">Professional copywriting for landing pages, email campaigns, and more.</div>
+                        <div class="addon-price">+$1,500/mo</div>
+                    </div>
+                </div>
+
+                <div class="addon-option disabled">
+                    <input type="checkbox" class="addon-checkbox" disabled data-addon-name="Social Media Advertising" data-addon-price="1200">
+                    <div class="addon-content">
+                        <div class="addon-name">Social Media Advertising</div>
+                        <div class="addon-description">Strategic ad campaigns on Facebook, Instagram, LinkedIn, and TikTok.</div>
+                        <div class="addon-price">+$1,200/mo</div>
+                    </div>
+                </div>
+
+                <div class="addon-option disabled">
+                    <input type="checkbox" class="addon-checkbox" disabled data-addon-name="Video Production" data-addon-price="2000">
+                    <div class="addon-content">
+                        <div class="addon-name">Video Production</div>
+                        <div class="addon-description">Professional video content creation for marketing campaigns (2 videos).</div>
+                        <div class="addon-price">+$2,000/mo</div>
+                    </div>
+                </div>
+
+                <div class="addon-option disabled">
+                    <input type="checkbox" class="addon-checkbox" disabled data-addon-name="Press Release Distribution" data-addon-price="600">
+                    <div class="addon-content">
+                        <div class="addon-name">Press Release Distribution</div>
+                        <div class="addon-description">Distribute to 100+ media outlets across 2 countries and 5 industries of your choice.</div>
+                        <div class="addon-price">+$600/mo</div>
+                    </div>
+                </div>
+
+                <div class="addon-option disabled">
+                    <input type="checkbox" class="addon-checkbox" disabled data-addon-name="SEO Audit & Strategy" data-addon-price="950">
+                    <div class="addon-content">
+                        <div class="addon-name">SEO Audit & Strategy</div>
+                        <div class="addon-description">Comprehensive site audit with competitor analysis and optimization roadmap.</div>
+                        <div class="addon-price">+$950/mo</div>
+                    </div>
+                </div>
+
+                <div class="addon-option disabled">
+                    <input type="checkbox" class="addon-checkbox" disabled data-addon-name="CRO Optimization" data-addon-price="1100">
+                    <div class="addon-content">
+                        <div class="addon-name">Conversion Rate Optimization</div>
+                        <div class="addon-description">A/B testing and optimization to increase conversions across all touchpoints.</div>
+                        <div class="addon-price">+$1,100/mo</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Terms Section -->
+        <section class="payment-terms">
+            <h3>3. Choose Payment Frequency</h3>
+            <div class="terms-grid">
+                <label class="term-option">
+                    <input type="radio" name="paymentTerm" value="monthly" checked onchange="updateMetrics()">
+                    <span class="term-option-label">
+                        <label>Monthly</label>
+                        <span class="term-discount">No discount</span>
+                    </span>
+                </label>
+                <label class="term-option">
+                    <input type="radio" name="paymentTerm" value="quarterly" onchange="updateMetrics()">
+                    <span class="term-option-label">
+                        <label>Quarterly</label>
+                        <span class="term-discount">5% off</span>
+                    </span>
+                </label>
+                <label class="term-option">
+                    <input type="radio" name="paymentTerm" value="semi-annual" onchange="updateMetrics()">
+                    <span class="term-option-label">
+                        <label>Semi-Annual</label>
+                        <span class="term-discount">10% off</span>
+                    </span>
+                </label>
+                <label class="term-option">
+                    <input type="radio" name="paymentTerm" value="annual" onchange="updateMetrics()">
+                    <span class="term-option-label">
+                        <label>Annual</label>
+                        <span class="term-discount">15% off</span>
+                    </span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Finalize Section -->
+        <section class="finalize-section">
+            <button class="finalize-btn" id="finalize-btn" disabled onclick="finalizeSelections()">4. Finalize Selections →</button>
+        </section>
+
+        <!-- Terms Section -->
+        <section class="terms-section" id="terms-section">
+            <h3>5. Review & Accept Terms</h3>
+            
+            <div class="terms-agreement">
+                <input type="checkbox" id="terms-checkbox" onchange="updateTermsAgreement()">
+                <label for="terms-checkbox">☑ I have reviewed and agree to the Terms & Conditions, Assumptions, and Client Commitments outlined below</label>
+            </div>
+
+            <div class="terms-content">
+                <div class="terms-subsection">
+                    <h4>📋 Service Terms</h4>
+                    <ul>
+                        <li>Minimum 3-month contract term</li>
+                        <li>30-day cancellation notice required</li>
+                        <li>Monthly invoicing and payment</li>
+                        <li>All services billed in advance</li>
+                        <li>Price includes all listed deliverables</li>
+                    </ul>
+                </div>
+
+                <div class="terms-subsection">
+                    <h4>🎯 Expected Outcomes</h4>
+                    <ul>
+                        <li>Qualified prospects reached monthly</li>
+                        <li>Website traffic increase (30-40%)</li>
+                        <li>Lead conversion optimization</li>
+                        <li>Brand visibility enhancement</li>
+                        <li>Market positioning improvement</li>
+                    </ul>
+                </div>
+
+                <div class="terms-subsection">
+                    <h4>✅ Your Commitments</h4>
+                    <ul>
+                        <li>Provide required business information</li>
+                        <li>Timely feedback on deliverables</li>
+                        <li>Access to website/platforms</li>
+                        <li>Monthly strategy call participation</li>
+                        <li>Support our optimization efforts</li>
+                    </ul>
+                </div>
+
+                <div class="terms-subsection">
+                    <h4>⚖️ Assumptions</h4>
+                    <ul>
+                        <li>Website is live and functional</li>
+                        <li>Analytics properly configured</li>
+                        <li>Regular content updates provided</li>
+                        <li>No major business pivots</li>
+                        <li>Stable market conditions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Email Modal -->
+    <div class="modal" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Send Proposal Email</h2>
+                <button class="modal-close" onclick="closeEmailModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-summary">
+                    <p><strong>Package:</strong> <span id="modal-package">—</span></p>
+                    <p><strong>Monthly Investment:</strong> $<span id="modal-monthly">0</span></p>
+                    <p><strong>Payment Term:</strong> <span id="modal-payment">—</span></p>
+                    <p><strong>First Payment:</strong> $<span id="modal-first-payment">0</span></p>
+                </div>
+                <div class="modal-input-group">
+                    <label for="recipient-email">Recipient Email:</label>
+                    <input type="email" id="recipient-email" placeholder="prashant@neoticai.com" value="prashant@neoticai.com">
+                </div>
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-btn-cancel" onclick="closeEmailModal()">Cancel</button>
+                    <button class="modal-btn modal-btn-send" onclick="sendEmailProposal()">Send Email with PDF →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init('lWcX2ZAuSeQUVvyNk');
+
+        // Constants
+        const BACKEND_URL = 'http://localhost:5000';
+        const EMAILJS_SERVICE_ID = 'service_kkb35zr';
+        const EMAILJS_TEMPLATE_ID = 'template_dbqjamx';
+
+        // State management
+        let isFinalized = false;
+        let hasAgreed = false;
+        let selectedPackage = null;
+        let selectedAddons = [];
+
+        // Update metrics
+        function updateMetrics() {
+            const packageRadio = document.querySelector('input[name="basePackage"]:checked');
+            
+            if (!packageRadio) {
+                document.getElementById('header-total').textContent = 'Select package';
+                document.getElementById('header-payment').textContent = '—';
+                document.getElementById('header-prospects').textContent = '—';
+                document.getElementById('finalize-btn').disabled = true;
+                updateClearButtonVisibility();
+                return;
+            }
+
+            selectedPackage = packageRadio.value;
+            const basePrice = parseFloat(packageRadio.dataset.price);
+            const packageName = packageRadio.dataset.name;
+            const prospects = packageRadio.dataset.prospects;
+
+            // Enable add-ons
+            document.querySelectorAll('.addon-checkbox').forEach(cb => {
+                cb.disabled = false;
+                cb.closest('.addon-option').classList.remove('disabled');
+            });
+
+            // Calculate with add-ons
+            selectedAddons = [];
+            let addonTotal = 0;
+            document.querySelectorAll('.addon-checkbox:checked').forEach(cb => {
+                addonTotal += parseFloat(cb.dataset.addon_price || 0);
+                selectedAddons.push({
+                    name: cb.dataset.addon_name,
+                    price: parseFloat(cb.dataset.addon_price || 0)
+                });
+            });
+
+            const paymentTerm = document.querySelector('input[name="paymentTerm"]:checked').value;
+            const setupFee = getSetupFee(selectedPackage);
+            const monthlyTotal = basePrice + addonTotal;
+            
+            // Apply discount
+            const discountMap = { 'monthly': 0, 'quarterly': 0.05, 'semi-annual': 0.10, 'annual': 0.15 };
+            const discountPercent = discountMap[paymentTerm];
+            const discountedMonthly = monthlyTotal * (1 - discountPercent);
+            
+            // Format display
+            const termDisplay = paymentTerm.charAt(0).toUpperCase() + paymentTerm.slice(1).replace('-', ' ');
+            const discountDisplay = discountPercent > 0 ? ` (${(discountPercent * 100).toFixed(0)}% off)` : '';
+            
+            document.getElementById('header-total').textContent = `$${discountedMonthly.toFixed(0)}/mo + $${setupFee.toFixed(0)} setup`;
+            document.getElementById('header-payment').textContent = `${termDisplay}${discountDisplay}`;
+            document.getElementById('header-prospects').textContent = prospects;
+
+            // Update modal
+            document.getElementById('modal-package').textContent = packageName;
+            document.getElementById('modal-monthly').textContent = discountedMonthly.toFixed(0);
+            document.getElementById('modal-payment').textContent = `${termDisplay}${discountDisplay}`;
+            
+            const firstPayment = (discountedMonthly * getPaymentMultiplier(paymentTerm)) + setupFee;
+            document.getElementById('modal-first-payment').textContent = firstPayment.toFixed(0);
+
+            // Enable finalize button
+            document.getElementById('finalize-btn').disabled = false;
+
+            // Reset finalized state
+            isFinalized = false;
+            updateClearButtonVisibility();
+        }
+
+        function getSetupFee(pkg) {
+            const fees = { 'lead-generator': 1500, 'growth-accelerator': 2000, 'market-domination': 3500 };
+            return fees[pkg] || 0;
+        }
+
+        function getPaymentMultiplier(term) {
+            const multipliers = { 'monthly': 1, 'quarterly': 3, 'semi-annual': 6, 'annual': 12 };
+            return multipliers[term] || 1;
+        }
+
+        function updateClearButtonVisibility() {
+            const hasSelection = document.querySelector('input[name="basePackage"]:checked');
+            document.getElementById('clear-btn').style.display = hasSelection ? 'block' : 'none';
+        }
+
+        function finalizeSelections() {
+            if (!document.querySelector('input[name="basePackage"]:checked')) {
+                showToast('Please select a base package first', 'error');
+                return;
+            }
+
+            isFinalized = true;
+            
+            // Scroll to terms section
+            const termsSection = document.getElementById('terms-section');
+            termsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Highlight terms checkbox
+            const termsAgreement = document.querySelector('.terms-agreement');
+            termsAgreement.classList.add('highlight');
+            setTimeout(() => termsAgreement.classList.remove('highlight'), 3000);
+            
+            showToast('Please review and agree to the terms below', 'success');
+            
+            // Update finalize button text
+            document.getElementById('finalize-btn').textContent = '↑ Back to Top';
+            document.getElementById('finalize-btn').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateTermsAgreement() {
+            hasAgreed = document.getElementById('terms-checkbox').checked;
+            updateEmailButtonState();
+        }
+
+        function updateEmailButtonState() {
+            const emailBtn = document.getElementById('email-btn-header');
+            const canSendEmail = isFinalized && hasAgreed;
+            emailBtn.disabled = !canSendEmail;
+            
+            if (canSendEmail) {
+                emailBtn.style.animation = 'pulse 2s infinite';
             }
         }
-        
-        print("\n🧪 TEST EMAIL")
-        print(f"Sending test email to: {test_data['recipientEmail']}")
-        
-        # Try Resend
-        resend_result = send_via_resend(test_data['recipientEmail'], test_data['proposalData'])
-        
-        if resend_result['success']:
-            return jsonify({
-                'success': True,
-                'message': 'Test email sent successfully via Resend!',
-                'result': resend_result
-            }), 200
-        
-        # Fallback to EmailJS
-        emailjs_result = send_via_emailjs(test_data['recipientEmail'], test_data['proposalData'])
-        
-        if emailjs_result['success']:
-            return jsonify({
-                'success': True,
-                'message': 'Test email sent successfully via EmailJS!',
-                'result': emailjs_result
-            }), 200
-        
-        return jsonify({
-            'success': False,
-            'message': 'Test email failed',
-            'resend': resend_result,
-            'emailjs': emailjs_result
-        }), 500
-    
-    except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
 
-@app.errorhandler(404)
-def not_found(error):
-    return jsonify({'error': 'Endpoint not found'}), 404
+        function openEmailModal() {
+            if (!isFinalized || !hasAgreed) {
+                showToast('Please finalize selections and agree to terms first', 'error');
+                return;
+            }
+            document.getElementById('emailModal').classList.add('active');
+        }
 
-@app.errorhandler(500)
-def server_error(error):
-    return jsonify({'error': 'Internal server error'}), 500
+        function closeEmailModal() {
+            document.getElementById('emailModal').classList.remove('active');
+        }
 
-if __name__ == '__main__':
-    print("\n🚀 Starting BMJ-Machinery Proposal Email Server...")
-    print(f"📍 Server running on http://localhost:5000")
-    print("📝 Available endpoints:")
-    print("   - POST /api/send-email (Send proposal email)")
-    print("   - GET  /health (Health check)")
-    print("   - POST /api/test-email (Send test email)")
-    print("\n" + "="*60 + "\n")
-    
-    app.run(debug=True, host='0.0.0.0', port=5000)
+        async function sendEmailProposal() {
+            const recipientEmail = document.getElementById('recipient-email').value;
+            
+            if (!recipientEmail || !recipientEmail.includes('@')) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
+
+            const sendBtn = event.target;
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Sending...';
+
+            try {
+                // Generate PDF
+                const pdfData = generateProposalPDF();
+                
+                // Try backend first
+                const response = await fetch(`${BACKEND_URL}/api/send-email`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        recipientEmail,
+                        proposalData: getProposalData()
+                    })
+                }).catch(() => ({ ok: false }));
+
+                if (response.ok) {
+                    showToast('✓ Email sent successfully!', 'success');
+                    closeEmailModal();
+                } else {
+                    // Fallback to EmailJS
+                    await sendViaEmailJS(recipientEmail, pdfData);
+                }
+            } catch (error) {
+                console.error('Email error:', error);
+                showToast('Error sending email. Please try again.', 'error');
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send Email with PDF →';
+            }
+        }
+
+        async function sendViaEmailJS(recipientEmail, pdfBase64) {
+            const proposalData = getProposalData();
+            
+            const templateParams = {
+                to_email: recipientEmail,
+                from_name: 'NeoticAI Team',
+                from_email: 'prashant@neoticai.com',
+                package_name: proposalData.packageName,
+                monthly_total: proposalData.monthlyTotal,
+                payment_term: proposalData.paymentTerm,
+                first_payment: proposalData.firstPayment,
+                prospects: proposalData.prospects,
+                pdf_attachment: pdfBase64
+            };
+
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+            showToast('✓ Email sent successfully via EmailJS!', 'success');
+            closeEmailModal();
+        }
+
+        function getProposalData() {
+            const packageRadio = document.querySelector('input[name="basePackage"]:checked');
+            const basePrice = parseFloat(packageRadio.dataset.price);
+            const paymentTerm = document.querySelector('input[name="paymentTerm"]:checked').value;
+            const setupFee = getSetupFee(packageRadio.value);
+
+            let addonTotal = 0;
+            document.querySelectorAll('.addon-checkbox:checked').forEach(cb => {
+                addonTotal += parseFloat(cb.dataset.addon_price || 0);
+            });
+
+            const monthlyTotal = basePrice + addonTotal;
+            const discountMap = { 'monthly': 0, 'quarterly': 0.05, 'semi-annual': 0.10, 'annual': 0.15 };
+            const discountPercent = discountMap[paymentTerm];
+            const discountedMonthly = monthlyTotal * (1 - discountPercent);
+            const firstPayment = (discountedMonthly * getPaymentMultiplier(paymentTerm)) + setupFee;
+
+            return {
+                packageName: packageRadio.dataset.name,
+                monthlyTotal: discountedMonthly.toFixed(0),
+                paymentTerm: paymentTerm.replace('-', ' '),
+                firstPayment: firstPayment.toFixed(0),
+                prospects: packageRadio.dataset.prospects
+            };
+        }
+
+        function generateProposalPDF() {
+            const doc = new jsPDF();
+            const proposalData = getProposalData();
+
+            doc.setFontSize(20);
+            doc.text('Marketing Proposal for BMJ-Machinery', 20, 20);
+
+            doc.setFontSize(12);
+            doc.text('Selected Package:', 20, 40);
+            doc.text(proposalData.packageName, 20, 50);
+            doc.text(`Monthly Investment: $${proposalData.monthlyTotal}`, 20, 60);
+            doc.text(`Payment Term: ${proposalData.paymentTerm}`, 20, 70);
+            doc.text(`First Payment: $${proposalData.firstPayment}`, 20, 80);
+
+            return doc.output('datauristring').split(',')[1];
+        }
+
+        function clearSelections() {
+            if (!confirm('Are you sure you want to clear all selections?')) return;
+
+            // Reset radios and checkboxes
+            document.querySelectorAll('input[name="basePackage"]').forEach(r => r.checked = false);
+            document.querySelectorAll('.addon-checkbox').forEach(cb => {
+                cb.checked = false;
+                cb.disabled = true;
+                cb.closest('.addon-option').classList.add('disabled');
+            });
+            document.querySelectorAll('input[name="paymentTerm"]').forEach(r => {
+                r.checked = r.value === 'monthly';
+            });
+            document.getElementById('terms-checkbox').checked = false;
+
+            // Reset state
+            isFinalized = false;
+            hasAgreed = false;
+            selectedPackage = null;
+            selectedAddons = [];
+
+            // Reset UI
+            document.getElementById('header-total').textContent = 'Select package';
+            document.getElementById('header-payment').textContent = '—';
+            document.getElementById('header-prospects').textContent = '—';
+            document.getElementById('finalize-btn').disabled = true;
+            document.getElementById('finalize-btn').textContent = '4. Finalize Selections →';
+            document.getElementById('email-btn-header').disabled = true;
+            document.getElementById('clear-btn').style.display = 'none';
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showToast('✓ All selections cleared!', 'success');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Event delegation for checkboxes
+        document.addEventListener('change', (e) => {
+            if (e.target.classList.contains('addon-checkbox')) {
+                updateMetrics();
+            }
+        });
+
+        // Initialize
+        updateClearButtonVisibility();
+    </script>
+</body>
+</html>
