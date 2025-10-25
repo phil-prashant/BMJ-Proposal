@@ -28,7 +28,7 @@ Set these in Railway's dashboard under "Variables" tab:
 | `EMAILJS_SERVICE_ID` | `service_xxxxx` | EmailJS service ID |
 | `EMAILJS_TEMPLATE_ID` | `template_xxxxx` | EmailJS template ID |
 | `EMAILJS_PUBLIC_KEY` | `xxxxxxxxx` | EmailJS public key |
-| `PORT` | `5000` | Application port (optional, Railway provides this) |
+| `PORT` | `5000` | Application port (Railway auto-provides this) |
 | `FLASK_ENV` | `production` | Flask environment |
 
 ## 📖 Deployment Instructions Summary
@@ -51,7 +51,7 @@ Expected response:
 ```json
 {
   "status": "healthy",
-  "timestamp": "2025-10-25T10:46:15.926Z",
+  "timestamp": "2024-01-01T12:00:00.000Z",
   "service": "BMJ-Machinery Email Server"
 }
 ```

@@ -107,7 +107,7 @@ Once deployment is complete:
    ```json
    {
      "status": "healthy",
-     "timestamp": "2025-10-25T10:46:15.926Z",
+     "timestamp": "2024-01-01T12:00:00.000Z",
      "service": "BMJ-Machinery Email Server"
    }
    ```
