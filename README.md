@@ -39,8 +39,8 @@ This clears the browser cache and loads the most recent version of the site.
 ## 📁 Project Structure
 
 - `index.html` - Main proposal application
-- `app.py` - Backend Python script (if needed)
-- `script.py` - HTML generation script
+- `app.py` - Alternative proposal application HTML file
+- `script.py` - Python script for generating proposal HTML content
 - `CNAME` - Custom domain configuration for GitHub Pages
 
 ## 🔧 Development
