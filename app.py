@@ -409,12 +409,16 @@ def server_error(error):
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
+    # Only enable debug mode in local development, not in production
+    debug_mode = os.getenv('FLASK_ENV', 'production') == 'development'
+    
     print("\n🚀 Starting BMJ-Machinery Proposal Email Server...")
     print(f"📍 Server running on http://0.0.0.0:{port}")
+    print(f"🔧 Debug mode: {'ON' if debug_mode else 'OFF'}")
     print("📝 Available endpoints:")
     print("   - POST /api/send-email (Send proposal email)")
     print("   - GET  /health (Health check)")
     print("   - POST /api/test-email (Send test email)")
     print("\n" + "="*60 + "\n")
     
-    app.run(debug=True, host='0.0.0.0', port=port)
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
