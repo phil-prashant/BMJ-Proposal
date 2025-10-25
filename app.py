@@ -410,7 +410,8 @@ def server_error(error):
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     # Only enable debug mode in local development, not in production
-    debug_mode = os.getenv('FLASK_ENV', 'production') == 'development'
+    # Explicitly check for 'true' value to make security intent clear
+    debug_mode = os.getenv('FLASK_DEBUG', 'false').lower() == 'true'
     
     print("\n🚀 Starting BMJ-Machinery Proposal Email Server...")
     print(f"📍 Server running on http://0.0.0.0:{port}")
