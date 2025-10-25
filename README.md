@@ -40,16 +40,18 @@ This application is configured for easy deployment to Render.com using the inclu
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `gunicorn app:app`
 5. Add Environment Variables:
-   - `RESEND_API_KEY` = `re_73miNRj6_83vuf1KSmVNeiAwBM1U37jtN`
-   - `EMAILJS_SERVICE_ID` = `service_kkb35zr`
+   - `RESEND_API_KEY` = `your_resend_api_key_here`
+   - `EMAILJS_SERVICE_ID` = `your_emailjs_service_id_here`
 6. Click "Create Web Service"
 
 ### Environment Variables
 
-The following environment variables are required:
+The following environment variables are configured in `render.yaml`:
 
 - `RESEND_API_KEY`: API key for Resend email service
 - `EMAILJS_SERVICE_ID`: Service ID for EmailJS fallback
+
+**Note:** For enhanced security, you can also set these values directly in the Render dashboard under "Environment" instead of committing them in `render.yaml`.
 
 Optional variables (have defaults in code):
 - `EMAILJS_TEMPLATE_ID`: Template ID for EmailJS (default: `template_dbqjamx`)
