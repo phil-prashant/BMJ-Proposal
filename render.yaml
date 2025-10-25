@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: bmj-proposal-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    healthCheckPath: /health
+    envVars:
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAILJS_SERVICE_ID
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.12.3
