@@ -1366,7 +1366,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         recipientEmail,
-                        proposalData: getProposalData()
+                        proposalData: getProposalData(),
+                        pdfBase64: pdfData
                     })
                 }).catch(() => ({ ok: false }));
 
