@@ -207,7 +207,7 @@ def send_email():
         app.logger.error(f'Error sending email: {str(e)}')
         return jsonify({
             'error': 'Failed to send email',
-            'message': str(e)
+            'message': 'An error occurred while processing your request'
         }), 500
 
 
@@ -234,6 +234,10 @@ if __name__ == '__main__':
         print("ERROR: SENDER_NAME not found in environment variables")
         exit(1)
     
+    # Get debug mode from environment variable, default to False for production
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    
     print(f"Starting Flask server...")
     print(f"Sender: {SENDER_NAME} <{SENDER_EMAIL}>")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    print(f"Debug mode: {debug_mode}")
+    app.run(host='0.0.0.0', port=5000, debug=debug_mode)

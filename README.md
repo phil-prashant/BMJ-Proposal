@@ -29,6 +29,7 @@ An interactive web-based proposal builder for BMJ-Machinery with email delivery 
    - `SENDGRID_API_KEY`: Your SendGrid API key
    - `SENDER_EMAIL`: Email address for sending proposals
    - `SENDER_NAME`: Name that appears as the sender
+   - `FLASK_DEBUG`: Set to `True` for development, `False` for production (default: False)
 
 3. **Start the backend server**:
    ```bash
