@@ -16,12 +16,15 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Configuration
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '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')
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 SENDER_EMAIL = 'elena@neoticai.email'
 SENDER_NAME = 'Elena from NeoticAI'
 CC_EMAIL = 'work@neoticai.com'
 
-print(f"✓ SENDGRID_API_KEY loaded: {SENDGRID_API_KEY[:10]}...")
+if SENDGRID_API_KEY:
+    print("✓ SENDGRID_API_KEY loaded successfully")
+else:
+    print("⚠ WARNING: SENDGRID_API_KEY not set in environment variables")
 print(f"✓ Sender: {SENDER_EMAIL}")
 print(f"✓ CC: {CC_EMAIL}")
 
@@ -38,6 +41,14 @@ def health_check():
 def send_email():
     """Send proposal email with PDF attachment"""
     try:
+        # Check if SendGrid API key is configured
+        if not SENDGRID_API_KEY:
+            return jsonify({
+                'success': False,
+                'message': 'Email service not configured. Please set SENDGRID_API_KEY environment variable.',
+                'error': 'SENDGRID_API_KEY not found'
+            }), 500
+        
         data = request.json
         recipient_email = data.get('recipientEmail')
         proposal_data = data.get('proposalData')
