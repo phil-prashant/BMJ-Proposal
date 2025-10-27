@@ -34,13 +34,55 @@ def health_check():
         'sender_email': SENDER_EMAIL
     })
 
-@app.route('/api/send-email', methods=['POST'])
-def send_email():
+@app.route('/api/send-proposal', methods=['POST'])
+def send_proposal():
     """Send proposal email with PDF attachment"""
     try:
         data = request.json
         recipient_email = data.get('recipientEmail')
-        proposal_data = data.get('proposalData')
+        
+        # Transform frontend data to backend format
+        selected_package = data.get('selectedPackage', {})
+        selected_addons = data.get('selectedAddons', [])
+        selected_frequency = data.get('selectedFrequency', 'monthly')
+        total_monthly = data.get('totalMonthly', 0)
+        
+        # Calculate discount and payment details
+        discount_rates = {'monthly': 0, 'quarterly': 0.05, 'annual': 0.15}
+        discount_rate = discount_rates.get(selected_frequency, 0)
+        discount = discount_rate * 100
+        
+        # Calculate base monthly total (before discount)
+        base_monthly = selected_package.get('price', 0) + sum(addon.get('price', 0) for addon in selected_addons)
+        discounted_monthly = base_monthly * (1 - discount_rate)
+        
+        # Calculate first payment based on frequency (after discount)
+        if selected_frequency == 'monthly':
+            first_payment = discounted_monthly
+        elif selected_frequency == 'quarterly':
+            first_payment = discounted_monthly * 3
+        else:  # annual
+            first_payment = discounted_monthly * 12
+        
+        # Calculate total prospects
+        package_prospects = {
+            'Growth Accelerator': 700,
+            'Market Domination': 900,
+            'Industry Leadership': 1300
+        }
+        prospects = package_prospects.get(selected_package.get('name', ''), 0)
+        
+        # Build proposal_data in expected format
+        proposal_data = {
+            'packageName': selected_package.get('name', ''),
+            'monthlyTotal': base_monthly,
+            'paymentTerm': selected_frequency,
+            'discount': discount,
+            'discountedMonthly': discounted_monthly,
+            'firstPayment': first_payment,
+            'addons': selected_addons,
+            'prospects': prospects
+        }
         
         print(f"\n📧 Processing email request...")
         print(f"To: {recipient_email}")
