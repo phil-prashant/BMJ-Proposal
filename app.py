@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, Attachment, FileContent, FileName, FileType, Disposition
+from sendgrid.helpers.mail import Mail, Attachment, FileContent, FileName, FileType, Disposition, Cc
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import simpleProducer
@@ -187,6 +187,14 @@ def send_proposal():
             """
         )
 
+        # Add CC if configured and different from sender
+        if cc_email and cc_email != from_email:
+            # Validate CC email format
+            if '@' in cc_email and '.' in cc_email:
+                message.cc = Cc(cc_email)
+            else:
+                print(f"Warning: Invalid CC email format '{cc_email}', skipping CC")
+
         # Attach PDF
         attachment = Attachment(
             FileContent(pdf_base64),
@@ -201,19 +209,8 @@ def send_proposal():
         response = sg.send(message)
 
         if response.status_code == 202:
-            print(f"Email sent successfully to {recipient_email} (CC: {cc_email if cc_email != from_email else 'None'})")
-            # Optional: Add CC by creating a separate send if needed, but SendGrid supports cc in Mail
-            if cc_email and cc_email != from_email:
-                cc_message = Mail(
-                    from_email=from_email,
-                    to_emails=cc_email,
-                    subject=message.subject,
-                    html_content=f"<p>CC: Proposal sent to {recipient_email}</p>{message.html_content}",
-                    attachments=[attachment]
-                )
-                sg.send(cc_message)
-                print(f"CC email sent to {cc_email}")
-
+            cc_info = f" (CC: {cc_email})" if cc_email and cc_email != from_email else ""
+            print(f"Email sent successfully to {recipient_email}{cc_info}")
             return jsonify({"success": True, "message": "Proposal sent successfully"}), 200
         else:
             error_body = response.body.decode('utf-8')
