@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, Email, To, Cc
+from sendgrid.helpers.mail import Mail, Email, To, Cc, Attachment
 import os
 from datetime import datetime
 import base64
@@ -113,12 +113,13 @@ def send_proposal():
         message.cc = [Cc(CC_EMAIL)]
         
         # Add PDF attachment
-        message.attachment = [{
-            'content': pdf_base64,
-            'type': 'application/pdf',
-            'filename': 'BMJ-Machinery-Proposal.pdf',
-            'disposition': 'attachment'
-        }]
+        attachment = Attachment(
+            file_content=pdf_base64,
+            file_name='BMJ-Machinery-Proposal.pdf',
+            file_type='application/pdf',
+            disposition='attachment'
+        )
+        message.attachment = attachment
         
         # Send email
         sg = SendGridAPIClient(SENDGRID_API_KEY)
