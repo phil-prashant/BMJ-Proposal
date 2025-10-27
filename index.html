@@ -3,289 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Proposal for Chi Feng Mu | BMJ-Machinery Marketing Solutions</title>
     <link rel="icon" type="image/x-icon" href="about:blank">
+    <title>Custom Proposal for Chi Feng Mu | BMJ-Machinery Marketing Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --accent-color: #f59e0b;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-            --warning-color: #f59e0b;
-            --dark-color: #1f2937;
-            --light-color: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-400: #9ca3af;
-            --gray-500: #6b7280;
-            --gray-600: #4b5563;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --gray-900: #111827;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --border-radius: 0.5rem;
-            --border-radius-lg: 0.75rem;
-            --border-radius-xl: 1rem;
-            --border-width: 1px;
-            --font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            --font-size-sm: 0.875rem;
-            --font-size-base: 1rem;
-            --font-size-lg: 1.125rem;
-            --font-size-xl: 1.25rem;
-            --font-size-2xl: 1.5rem;
-            --font-weight-normal: 400;
-            --font-weight-medium: 500;
-            --font-weight-semibold: 600;
-            --font-weight-bold: 700;
-            --line-height: 1.5;
-            --letter-spacing: 0.025em;
-            --transition: all 0.15s ease-in-out;
-        }
-
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: var(--font-family);
-            line-height: var(--line-height);
-            color: var(--gray-700);
-            background-color: var(--light-color);
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 20px;
         }
 
-        .header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 2rem 0;
             text-align: center;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .header h1 {
-            font-size: var(--font-size-2xl);
-            font-weight: var(--font-weight-bold);
-            margin: 0 0 0.5rem 0;
-            letter-spacing: -0.025em;
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        .header .subtitle {
-            font-size: var(--font-size-lg);
+        header p {
+            font-size: 1.2rem;
             opacity: 0.9;
-            margin: 0;
         }
 
         .intro {
             background: white;
             padding: 2rem;
             margin: 2rem 0;
-            border-radius: var(--border-radius-xl);
-            box-shadow: var(--shadow-md);
-            border: var(--border-width) solid var(--gray-200);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
         .intro h2 {
-            color: var(--primary-color);
-            font-size: var(--font-size-xl);
-            margin-top: 0;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
         }
 
         .intro p {
-            font-size: var(--font-size-base);
-            margin-bottom: 1rem;
-            color: var(--gray-600);
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .instructions {
-            background: var(--gray-100);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin: 2rem 0;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .instructions h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-        }
-
-        .instructions ol {
-            padding-left: 1.5rem;
-            color: var(--gray-700);
-        }
-
-        .instructions li {
-            margin-bottom: 0.5rem;
-            font-size: var(--font-size-sm);
-        }
-
-        .main-content {
+        .selection-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin: 2rem 0;
         }
 
-        .packages-section, .addons-section {
+        .package-section, .addons-section {
             background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-            border: var(--border-width) solid var(--gray-200);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .section-title {
-            color: var(--primary-color);
-            font-size: var(--font-size-lg);
-            font-weight: var(--font-weight-semibold);
-            margin: 0 0 1rem 0;
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
         }
 
-        .package-card {
-            border: var(--border-width) solid var(--gray-300);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .package-card:hover {
-            border-color: var(--secondary-color);
-            box-shadow: var(--shadow-md);
-        }
-
-        .package-card.selected {
-            border-color: var(--success-color);
-            background-color: #f0fdf4;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .package-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .package-title {
-            font-size: var(--font-size-lg);
-            font-weight: var(--font-weight-semibold);
-            color: var(--primary-color);
-        }
-
-        .package-price {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--accent-color);
-        }
-
-        .package-details {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .package-details li {
-            padding: 0.25rem 0;
-            color: var(--gray-600);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .package-details li:before {
-            content: "✓";
-            color: var(--success-color);
-            font-weight: var(--font-weight-bold);
+        .section-header i {
+            font-size: 1.5rem;
+            color: #667eea;
             margin-right: 0.5rem;
         }
 
-        .package-footer {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: var(--border-width) solid var(--gray-300);
-            font-size: var(--font-size-sm);
-            color: var(--gray-500);
-            font-style: italic;
+        .section-header h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: 600;
         }
 
-        .addon-checkbox {
+        .package-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .package-option {
             display: flex;
             align-items: center;
-            margin-bottom: 0.75rem;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .addon-checkbox:hover {
-            background-color: var(--gray-100);
+        .package-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
         }
 
-        .addon-checkbox input[type="checkbox"] {
-            margin-right: 0.75rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: var(--secondary-color);
+        .package-option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .addon-checkbox label {
-            margin: 0;
-            cursor: pointer;
+        .package-option input[type="radio"] {
+            display: none;
+        }
+
+        .package-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-right: 1rem;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .package-option.selected .package-radio {
+            border-color: white;
+            background: white;
+        }
+
+        .package-option.selected .package-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .package-details {
             flex: 1;
         }
 
-        .addon-price {
-            font-weight: var(--font-weight-semibold);
-            color: var(--accent-color);
-            min-width: 4rem;
+        .package-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .package-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #27ae60;
+        }
+
+        .package-option.selected .package-price {
+            color: #fff;
+        }
+
+        .package-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .package-option.selected .package-description {
+            opacity: 0.9;
+        }
+
+        .package-deliverables {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .deliverable {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.25rem;
+        }
+
+        .deliverable i {
+            color: #667eea;
+            margin-right: 0.5rem;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+
+        .package-option.selected .deliverable i {
+            color: white;
         }
 
         .addons-section {
             opacity: 0.5;
             pointer-events: none;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
-        .addons-section.enabled {
+        .addons-section.active {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .payment-section {
-            grid-column: 1 / -1;
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-            border: var(--border-width) solid var(--gray-200);
-            margin: 2rem 0;
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
         }
 
-        .payment-title {
-            color: var(--primary-color);
-            font-size: var(--font-size-lg);
-            font-weight: var(--font-weight-semibold);
-            margin: 0 0 1rem 0;
+        .addon-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .addon-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .addon-item.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .addon-checkbox {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .addon-item:hover .addon-checkbox {
+            border-color: #667eea;
+        }
+
+        .addon-item.selected .addon-checkbox {
+            background: #667eea;
+            border-color: #667eea;
+        }
+
+        .addon-item.selected .addon-checkbox i {
+            color: white;
+            font-size: 12px;
+        }
+
+        .addon-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .addon-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 0.75rem;
+        }
+
+        .addon-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .payment-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin: 2rem 0;
         }
 
         .payment-options {
@@ -298,279 +323,274 @@
             flex: 1;
             display: flex;
             align-items: center;
-            padding: 0.75rem;
-            border: var(--border-width) solid var(--gray-300);
-            border-radius: var(--border-radius);
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-option:hover {
+            border-color: #667eea;
+        }
+
+        .payment-option.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .payment-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .payment-option.selected .payment-radio {
+            border-color: #667eea;
+            background: #667eea;
+        }
+
+        .payment-option.selected .payment-radio::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
             background: white;
+            border-radius: 50%;
         }
 
-        .payment-option:hover, .payment-option.selected {
-            border-color: var(--secondary-color);
-            background-color: #eff6ff;
-        }
-
-        .payment-option input[type="radio"] {
-            margin-right: 0.5rem;
-            width: 1rem;
-            height: 1rem;
-            accent-color: var(--secondary-color);
-        }
-
-        .payment-option label {
-            margin: 0;
-            cursor: pointer;
+        .payment-label {
+            font-weight: 500;
+            color: #2c3e50;
         }
 
         .total-section {
-            background: var(--gray-100);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin-top: 1rem;
-            border: var(--border-width) solid var(--gray-300);
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: var(--font-size-sm);
-        }
-
-        .total-row.total {
-            font-size: var(--font-size-lg);
-            font-weight: var(--font-weight-bold);
-            border-top: var(--border-width) solid var(--gray-400);
-            padding-top: 0.5rem;
-            margin-top: 0.5rem;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
         }
 
         .total-amount {
-            color: var(--primary-color);
-        }
-
-        .btn {
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-base);
-            font-weight: var(--font-weight-semibold);
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
-        .btn:hover {
-            background: var(--primary-color);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
+        .total-breakdown {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
         }
 
-        .btn:disabled {
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
 
-        .btn-success {
-            background: var(--success-color);
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
         }
 
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .btn-danger {
-            background: var(--danger-color);
-        }
-
-        .btn-danger:hover {
-            background: #dc2626;
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
         }
 
         .terms-section {
-            grid-column: 1 / -1;
-            background: white;
+            background: #f8f9fa;
             padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-            border: var(--border-width) solid var(--gray-200);
-            margin: 2rem 0;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
         }
 
         .terms-checkbox {
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            margin-bottom: 1rem;
-            font-size: var(--font-size-sm);
+            font-size: 0.95rem;
+            color: #555;
         }
 
         .terms-checkbox input[type="checkbox"] {
-            margin-top: 0.25rem;
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: var(--secondary-color);
+            width: 18px;
+            height: 18px;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
         }
 
-        .terms-text {
-            flex: 1;
-            line-height: 1.6;
-        }
-
-        .email-section {
-            grid-column: 1 / -1;
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-            border: var(--border-width) solid var(--gray-200);
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .email-input-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .email-input {
-            flex: 1;
-            padding: 0.75rem;
-            border: var(--border-width) solid var(--gray-300);
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-base);
-        }
-
-        .email-input:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
-        }
-
-        .email-btn {
-            background: var(--success-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-base);
-            font-weight: var(--font-weight-semibold);
-            cursor: pointer;
-            transition: var(--transition);
-            white-space: nowrap;
-        }
-
-        .email-btn:hover {
-            background: #059669;
-        }
-
-        .email-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Modal Styles */
-        .modal {
+        .email-modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgb(0 0 0 / 0.5);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-content {
-            background-color: white;
-            margin: 5% auto;
+            background: white;
             padding: 2rem;
-            border-radius: var(--border-radius-xl);
-            width: 90%;
+            border-radius: 12px;
             max-width: 500px;
-            max-height: 90vh;
+            width: 90%;
+            max-height: 80vh;
             overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
         }
 
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
         }
 
-        .close {
-            color: var(--gray-500);
-            float: right;
+        .modal-title {
             font-size: 1.5rem;
-            font-weight: var(--font-weight-bold);
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
+            color: #999;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .close:hover {
-            color: var(--gray-700);
+        .close-modal:hover {
+            color: #333;
         }
 
-        .modal h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-            margin-bottom: 1rem;
+        .email-input-group {
+            margin-bottom: 1.5rem;
         }
 
-        .modal input {
+        .email-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .email-input-group input {
             width: 100%;
             padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: var(--border-width) solid var(--gray-300);
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-base);
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
         }
 
-        .modal input:focus {
+        .email-input-group input:focus {
             outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+            border-color: #667eea;
         }
 
-        .modal .btn {
-            margin-bottom: 0;
+        .email-input-group input:invalid {
+            border-color: #e74c3c;
         }
 
-        /* Toast Notifications */
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .btn-send:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-cancel {
+            background: white;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+
+        .btn-cancel:hover {
+            border-color: #999;
+            color: #333;
+        }
+
         .toast {
             position: fixed;
-            top: 1rem;
-            right: 1rem;
-            min-width: 300px;
+            top: 20px;
+            right: 20px;
             padding: 1rem 1.5rem;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
             color: white;
-            font-weight: var(--font-weight-semibold);
-            box-shadow: var(--shadow-lg);
+            font-weight: 500;
+            z-index: 2000;
             transform: translateX(400px);
-            transition: transform 0.3s ease-in-out;
-            z-index: 1001;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .toast.show {
@@ -578,506 +598,637 @@
         }
 
         .toast.success {
-            background: var(--success-color);
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
         }
 
         .toast.error {
-            background: var(--danger-color);
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
         }
 
-        .toast.warning {
-            background: var(--warning-color);
-            color: var(--gray-900);
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
         }
 
-        /* Responsive Design */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        .terms-text {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            max-height: 100px;
+            overflow-y: auto;
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            margin-top: 0.5rem;
+        }
+
         @media (max-width: 768px) {
-            .main-content {
+            .selection-container {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
             }
 
             .payment-options {
                 flex-direction: column;
             }
 
-            .email-input-group {
-                flex-direction: column;
-            }
-
-            .header h1 {
-                font-size: var(--font-size-xl);
+            .total-amount {
+                font-size: 2rem;
             }
 
             .container {
-                padding: 0 0.5rem;
-            }
-
-            .packages-section, .addons-section, .payment-section, .terms-section, .email-section {
-                padding: 1rem;
+                padding: 10px;
             }
         }
 
-        /* Loading Spinner */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid var(--gray-200);
-            border-radius: 50%;
-            border-top-color: var(--secondary-color);
-            animation: spin 1s ease-in-out infinite;
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .youtube-note {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
         }
 
-        /* Hidden class for conditional rendering */
-        .hidden {
-            display: none !important;
+        .dfy-badge {
+            background: #28a745;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
         }
 
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Focus styles for accessibility */
-        .btn:focus, input:focus, .package-card:focus, .addon-checkbox:focus {
-            outline: 2px solid var(--secondary-color);
-            outline-offset: 2px;
+        .payment-note {
+            background: #f8f9fa;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #856404;
         }
     </style>
 </head>
 <body>
-    <header class="header">
+    <header>
         <div class="container">
-            <h1>Custom Marketing Proposal</h1>
-            <p class="subtitle">for Chi Feng Mu | BMJ-Machinery Marketing Solutions</p>
+            <h1><i class="fas fa-industry"></i> BMJ-Machinery Marketing Solutions</h1>
+            <p>Custom Digital Marketing Proposal for Chi Feng Mu</p>
         </div>
     </header>
 
-    <main class="container">
-        <section class="intro">
+    <div class="container">
+        <div class="intro">
             <h2>Welcome to Your Personalized Marketing Strategy</h2>
-            <p>This interactive proposal allows you to customize your marketing package for BMJ-Machinery. Select your base package, choose add-ons, set payment frequency, review terms, and generate your proposal PDF via email.</p>
-            <p>Follow the steps below to create your perfect marketing solution. All services are Done-For-You (DFY) - we handle everything from outreach to content creation.</p>
-        </section>
-
-        <section class="instructions">
-            <h3>How to Use This Proposal Builder</h3>
-            <ol>
-                <li><strong>Select Base Package:</strong> Choose from Growth Accelerator, Market Domination, or Industry Leadership based on your goals and budget.</li>
-                <li><strong>Enable Add-ons:</strong> Once a base package is selected, choose optional services like Press Release Distribution, Website Audit, or Social Media Audit.</li>
-                <li><strong>Choose Payment Frequency:</strong> Select Monthly, Quarterly, or Annual billing. Annual offers the best savings.</li>
-                <li><strong>Finalize Selections:</strong> Review your total cost and click "Finalize Choices" to lock in your package.</li>
-                <li><strong>Accept Terms:</strong> Check the agreement box to proceed.</li>
-                <li><strong>Send Proposal:</strong> Enter your email to receive the customized PDF proposal with all details.</li>
-            </ol>
-        </section>
-
-        <div class="main-content">
-            <section class="packages-section" aria-label="Base Package Selection">
-                <h2 class="section-title">📦 Base Packages</h2>
-                <div class="package-card" data-package="tier1" tabindex="0">
-                    <div class="package-header">
-                        <div class="package-title">Growth Accelerator</div>
-                        <div class="package-price">$5,500 <span style="font-size: 0.75em; opacity: 0.7;">/month</span></div>
-                    </div>
-                    <ul class="package-details">
-                        <li>600 outreaches on LinkedIn</li>
-                        <li>100 outreaches on Email</li>
-                        <li>LinkedIn Profile enhancement</li>
-                        <li>3 posts a week on LinkedIn</li>
-                        <li>YouTube excluded</li>
-                    </ul>
-                    <div class="package-footer">
-                        DFY (Done-For-You) Service
-                    </div>
-                </div>
-
-                <div class="package-card" data-package="tier2" tabindex="0">
-                    <div class="package-header">
-                        <div class="package-title">Market Domination</div>
-                        <div class="package-price">$7,800 <span style="font-size: 0.75em; opacity: 0.7;">/month</span></div>
-                    </div>
-                    <ul class="package-details">
-                        <li>700 outreaches on LinkedIn</li>
-                        <li>200 outreaches on Email</li>
-                        <li>LinkedIn Profile enhancement</li>
-                        <li>5 posts a week on LinkedIn</li>
-                        <li>YouTube included - 1 video per week</li>
-                    </ul>
-                    <div class="package-footer">
-                        DFY (Done-For-You) Service. For YouTube: Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.
-                    </div>
-                </div>
-
-                <div class="package-card" data-package="tier3" tabindex="0">
-                    <div class="package-header">
-                        <div class="package-title">Industry Leadership</div>
-                        <div class="package-price">$8,900 <span style="font-size: 0.75em; opacity: 0.7;">/month</span></div>
-                    </div>
-                    <ul class="package-details">
-                        <li>800 outreaches on LinkedIn</li>
-                        <li>500 outreaches on Email</li>
-                        <li>LinkedIn Profile enhancement</li>
-                        <li>10 posts a week on LinkedIn</li>
-                        <li>YouTube included - 2 videos per week</li>
-                    </ul>
-                    <div class="package-footer">
-                        DFY (Done-For-You) Service. For YouTube: Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.
-                    </div>
-                </div>
-
-                <button class="btn" id="finalizeBtn" disabled>Finalize Choices</button>
-            </section>
-
-            <section class="addons-section" aria-label="Add-on Services">
-                <h2 class="section-title">➕ Add-On Services</h2>
-                <div class="addon-checkbox">
-                    <input type="checkbox" id="pressRelease" value="1500">
-                    <label for="pressRelease">Press Release Distribution (2 countries, 5 industries) <span class="addon-price">+$1,500</span></label>
-                </div>
-                <div class="addon-checkbox">
-                    <input type="checkbox" id="websiteAudit" value="2500">
-                    <label for="websiteAudit">Professional Website Audit & SEO Report <span class="addon-price">+$2,500</span></label>
-                </div>
-                <div class="addon-checkbox">
-                    <input type="checkbox" id="socialAudit" value="1800">
-                    <label for="socialAudit">Social Media Audit & Strategy Session <span class="addon-price">+$1,800</span></label>
-                </div>
-            </section>
-
-            <section class="payment-section">
-                <h2 class="section-title payment-title">💳 Payment Frequency</h2>
-                <div class="payment-options">
-                    <div class="payment-option" data-frequency="monthly">
-                        <input type="radio" id="monthly" name="payment" value="monthly" checked>
-                        <label for="monthly">Monthly</label>
-                    </div>
-                    <div class="payment-option" data-frequency="quarterly">
-                        <input type="radio" id="quarterly" name="payment" value="quarterly">
-                        <label for="quarterly">Quarterly (5% discount)</label>
-                    </div>
-                    <div class="payment-option" data-frequency="annual">
-                        <input type="radio" id="annual" name="payment" value="annual">
-                        <label for="annual">Annual (15% discount)</label>
-                    </div>
-                </div>
-                <div class="total-section" id="totalSection">
-                    <div class="total-row">
-                        <span>Base Package:</span>
-                        <span id="baseTotal">$0</span>
-                    </div>
-                    <div class="total-row">
-                        <span>Add-ons:</span>
-                        <span id="addonsTotal">$0</span>
-                    </div>
-                    <div class="total-row total">
-                        <span>Total (Monthly Equivalent):</span>
-                        <span class="total-amount" id="grandTotal">$0</span>
-                    </div>
-                    <div style="font-size: 0.875rem; color: var(--gray-600); margin-top: 0.5rem;">
-                        Payment is upfront/project goes live after payment.
-                    </div>
-                </div>
-            </section>
-
-            <section class="terms-section">
-                <div class="terms-checkbox">
-                    <input type="checkbox" id="terms" required>
-                    <div class="terms-text">
-                        <strong>I agree to the Terms & Conditions:</strong> This proposal is valid for 30 days. Services commence upon receipt of first payment. All outreaches comply with platform policies. Content ownership transfers to client upon full payment. Cancellation policy: 30 days notice required after initial 3-month commitment. Full terms available upon request.
-                    </div>
-                </div>
-                <button class="btn btn-success" id="emailBtn" disabled style="margin-top: 1rem;">📧 Send Proposal via Email</button>
-            </section>
-
-            <section class="email-section hidden" id="emailSection">
-                <h2 class="section-title">📨 Receive Your Proposal</h2>
-                <p style="margin-bottom: 1rem; color: var(--gray-600);">Enter your email address to receive the customized PDF proposal with all selected services and pricing.</p>
-                <div class="email-input-group">
-                    <input type="email" id="userEmail" placeholder="your.email@example.com" required aria-label="Email address">
-                    <button class="email-btn" id="sendEmailBtn" disabled>Send Email with PDF</button>
-                </div>
-                <div id="emailStatus"></div>
-            </section>
+            <p>This interactive proposal allows you to customize your marketing package by selecting base packages, add-ons, and payment terms. Once you've made your selections, you can generate a professional PDF proposal and send it directly to your email. All services are Done-For-You (DFY) - our team handles everything from setup to execution.</p>
         </div>
-    </main>
+
+        <div class="selection-container">
+            <div class="package-section">
+                <div class="section-header">
+                    <i class="fas fa-box"></i>
+                    <h3>Base Packages</h3>
+                </div>
+                <div class="package-options">
+                    <label class="package-option" data-price="5500">
+                        <div class="package-radio"></div>
+                        <div class="package-details">
+                            <div class="package-name">Tier 1: Growth Accelerator</div>
+                            <div class="package-price">$5,500 <span class="dfy-badge">DFY</span></div>
+                            <div class="package-description">Perfect for businesses looking to establish a strong online presence and generate consistent leads.</div>
+                            <div class="package-deliverables">
+                                <div class="deliverable"><i class="fas fa-check"></i>600 outreaches on LinkedIn</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>100 outreaches on Email</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>LinkedIn Profile enhancement</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>3 posts a week on LinkedIn</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>YouTube excluded</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="package-option" data-price="7800">
+                        <div class="package-radio"></div>
+                        <div class="package-details">
+                            <div class="package-name">Tier 2: Market Domination</div>
+                            <div class="package-price">$7,800 <span class="dfy-badge">DFY</span></div>
+                            <div class="package-description">Comprehensive strategy for businesses aiming to capture significant market share and build authority.</div>
+                            <div class="package-deliverables">
+                                <div class="deliverable"><i class="fas fa-check"></i>700 outreaches on LinkedIn</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>200 outreaches on Email</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>LinkedIn Profile enhancement</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>5 posts a week on LinkedIn</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>YouTube included - 1 video per week</div>
+                            </div>
+                            <div class="youtube-note">
+                                <i class="fas fa-info-circle"></i> Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="package-option" data-price="8900">
+                        <div class="package-radio"></div>
+                        <div class="package-details">
+                            <div class="package-name">Tier 3: Industry Leadership</div>
+                            <div class="package-price">$8,900 <span class="dfy-badge">DFY</span></div>
+                            <div class="package-description">Premium package for industry leaders seeking maximum visibility, authority, and market dominance.</div>
+                            <div class="package-deliverables">
+                                <div class="deliverable"><i class="fas fa-check"></i>800 outreaches on LinkedIn</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>500 outreaches on Email</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>LinkedIn Profile enhancement</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>10 posts a week on LinkedIn</div>
+                                <div class="deliverable"><i class="fas fa-check"></i>YouTube included - 2 videos per week</div>
+                            </div>
+                            <div class="youtube-note">
+                                <i class="fas fa-info-circle"></i> Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="addons-section" id="addonsSection">
+                <div class="section-header">
+                    <i class="fas fa-plus-circle"></i>
+                    <h3>Add-On Services</h3>
+                </div>
+                <div class="addons-grid">
+                    <div class="addon-item" data-price="1200">
+                        <div class="addon-checkbox"><i class="fas fa-check"></i></div>
+                        <div class="addon-title">Press Release Distribution</div>
+                        <div class="addon-price">+$1,200/month</div>
+                        <div class="addon-description">Distribute professional press releases across major news wires and industry publications. Choose any 2 countries and 5 industries for targeted distribution.</div>
+                    </div>
+
+                    <div class="addon-item" data-price="2500">
+                        <div class="addon-checkbox"><i class="fas fa-check"></i></div>
+                        <div class="addon-title">Website Development</div>
+                        <div class="addon-price">+$2,500 one-time</div>
+                        <div class="addon-description">Custom professional website design and development optimized for conversions and SEO. Includes mobile-responsive design and basic SEO setup.</div>
+                    </div>
+
+                    <div class="addon-item" data-price="800">
+                        <div class="addon-checkbox"><i class="fas fa-check"></i></div>
+                        <div class="addon-title">Content Creation Package</div>
+                        <div class="addon-price">+$800/month</div>
+                        <div class="addon-description">Professional blog posts, case studies, and whitepapers (4 pieces/month) to establish thought leadership and improve SEO rankings.</div>
+                    </div>
+
+                    <div class="addon-item" data-price="1500">
+                        <div class="addon-checkbox"><i class="fas fa-check"></i></div>
+                        <div class="addon-title">PPC Advertising Management</div>
+                        <div class="addon-price">+$1,500/month</div>
+                        <div class="addon-description">Google Ads and LinkedIn Ads management with $2,000 monthly ad spend (not included). Full campaign setup, optimization, and reporting.</div>
+                    </div>
+
+                    <div class="addon-item" data-price="900">
+                        <div class="addon-checkbox"><i class="fas fa-check"></i></div>
+                        <div class="addon-title">Email Marketing Automation</div>
+                        <div class="addon-price">+$900/month</div>
+                        <div class="addon-description">Email sequence creation, automation setup, and lead nurturing campaigns. Includes template design and A/B testing.</div>
+                    </div>
+
+                    <div class="addon-item" data-price="1800">
+                        <div class="addon-checkbox"><i class="fas fa-check"></i></div>
+                        <div class="addon-title">Video Marketing Suite</div>
+                        <div class="addon-price">+$1,800/month</div>
+                        <div class="addon-description">Professional video production (2 videos/month), editing, and distribution across social platforms and your website.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <div class="section-header">
+                <i class="fas fa-credit-card"></i>
+                <h3>Payment Terms</h3>
+            </div>
+            <div class="payment-options">
+                <label class="payment-option">
+                    <div class="payment-radio"></div>
+                    <div class="payment-label">Monthly ($ upfront, auto-renews)</div>
+                </label>
+                <label class="payment-option">
+                    <div class="payment-radio"></div>
+                    <div class="payment-label">Quarterly (3 months, 5% discount)</div>
+                </label>
+                <label class="payment-option">
+                    <div class="payment-radio"></div>
+                    <div class="payment-label">Semi-Annual (6 months, 10% discount)</div>
+                </label>
+                <label class="payment-option">
+                    <div class="payment-radio"></div>
+                    <div class="payment-label">Annual (12 months, 15% discount)</div>
+                </label>
+            </div>
+            <div class="note">
+                <i class="fas fa-info-circle"></i> All packages include:
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem; font-size: 0.9rem;">
+                    <li>Payment due within 7 days of invoice date</li>
+                    <li>Setup fees apply only for new terms (quarterly, semi-annual, annual)</li>
+                    <li>Strategy session with account manager within 48 hours of contract signing</li>
+                    <li>Monthly reporting as specified in package details</li>
+                </ul>
+            </div>
+            <div class="payment-note">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Payment Terms:</strong> Payment is upfront/project goes live after payment.
+            </div>
+        </div>
+
+        <div class="total-section" id="totalSection">
+            <div class="total-amount" id="totalAmount">$0</div>
+            <div class="total-breakdown" id="totalBreakdown">
+                Select a package to see pricing details
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-secondary" id="finalizeBtn" disabled>
+                <i class="fas fa-check-circle"></i> Finalize Selections
+            </button>
+            <button class="btn btn-primary" id="emailBtn" disabled style="display: none;">
+                <i class="fas fa-envelope"></i> Email Proposal
+            </button>
+        </div>
+
+        <div class="terms-section">
+            <div class="terms-checkbox">
+                <input type="checkbox" id="termsCheckbox">
+                <label for="termsCheckbox">
+                    I have read and agree to the <strong>Terms & Conditions</strong> below:
+                </label>
+            </div>
+            <div class="terms-text">
+                <strong>Terms & Conditions</strong><br><br>
+                1. <strong>Services:</strong> BMJ-Machinery Marketing Solutions agrees to provide the digital marketing services as outlined in the selected package(s) and add-ons.<br>
+                2. <strong>Payment:</strong> All payments are due upfront. Services commence only after payment is received and cleared. Late payments may result in service suspension.<br>
+                3. <strong>Term & Termination:</strong> Monthly contracts auto-renew. Quarterly, semi-annual, and annual contracts require 30 days written notice for cancellation. Early termination incurs a 50% fee of remaining contract value.<br>
+                4. <strong>Performance:</strong> We use industry best practices but cannot guarantee specific results (leads, sales, rankings) due to external factors. Monthly reports will detail activities and performance metrics.<br>
+                5. <strong>Content Ownership:</strong> Client retains ownership of all provided content. BMJ retains rights to use anonymized case studies for marketing purposes.<br>
+                6. <strong>Confidentiality:</strong> Both parties agree to maintain confidentiality of proprietary information shared during the engagement.<br>
+                7. <strong>Limitation of Liability:</strong> BMJ's liability is limited to the value of services paid. We are not responsible for third-party platform changes or algorithm updates.<br>
+                8. <strong>Force Majeure:</strong> Neither party is liable for delays due to events beyond reasonable control.<br>
+                9. <strong>Governing Law:</strong> This agreement is governed by the laws of [Your State/Country].<br>
+                10. <strong>Acceptance:</strong> By selecting "Send Email with PDF" you agree to these terms and authorize BMJ to begin work upon payment receipt.<br><br>
+                <em>This proposal is valid for 30 days from creation date.</em>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 BMJ-Machinery Marketing Solutions. All rights reserved. | Confidential Proposal</p>
+        </div>
+    </div>
 
     <!-- Email Modal -->
-    <div id="emailModal" class="modal">
+    <div class="email-modal" id="emailModal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Confirm Your Email</h3>
-            <p>Please confirm your email address to send the proposal.</p>
-            <input type="email" id="confirmEmail" placeholder="Enter your email address">
-            <button class="btn" id="confirmEmailBtn">Send Proposal</button>
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-envelope"></i> Send Proposal
+                </div>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="email-input-group">
+                <label for="recipientEmail">Your Email Address:</label>
+                <input type="email" id="recipientEmail" placeholder="Enter your email address" required>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                <button class="btn btn-send" id="sendBtn">
+                    <span class="loading" id="loadingSpinner" style="display: none;"></span>
+                    Send Email with PDF
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
+    <div class="toast" id="toast"></div>
 
     <script>
-        // Configuration
         const BACKEND_URL = 'https://bmj-proposal-production.up.railway.app';
 
-        // Package data
-        const packages = {
+        // Global state
+        let selectedPackage = null;
+        let selectedAddons = [];
+        let selectedPayment = 'monthly';
+        let totalAmount = 0;
+        let packageDetails = {
             tier1: {
-                name: 'Growth Accelerator',
+                name: 'Tier 1: Growth Accelerator',
                 price: 5500,
-                details: [
+                deliverables: [
                     '600 outreaches on LinkedIn',
                     '100 outreaches on Email',
                     'LinkedIn Profile enhancement',
                     '3 posts a week on LinkedIn',
                     'YouTube excluded'
-                ],
-                footer: 'DFY (Done-For-You) Service'
+                ]
             },
             tier2: {
-                name: 'Market Domination',
+                name: 'Tier 2: Market Domination',
                 price: 7800,
-                details: [
+                deliverables: [
                     '700 outreaches on LinkedIn',
                     '200 outreaches on Email',
                     'LinkedIn Profile enhancement',
                     '5 posts a week on LinkedIn',
                     'YouTube included - 1 video per week'
                 ],
-                footer: 'DFY (Done-For-You) Service. For YouTube: Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.'
+                youtubeNote: 'Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.'
             },
             tier3: {
-                name: 'Industry Leadership',
+                name: 'Tier 3: Industry Leadership',
                 price: 8900,
-                details: [
+                deliverables: [
                     '800 outreaches on LinkedIn',
                     '500 outreaches on Email',
                     'LinkedIn Profile enhancement',
                     '10 posts a week on LinkedIn',
                     'YouTube included - 2 videos per week'
                 ],
-                footer: 'DFY (Done-For-You) Service. For YouTube: Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.'
+                youtubeNote: 'Client will need to provide raw videos that will be edited, enhanced and uploaded to YouTube.'
             }
         };
 
-        // Add-on data
-        const addons = {
-            pressRelease: { name: 'Press Release Distribution (2 countries, 5 industries)', price: 1500 },
-            websiteAudit: { name: 'Professional Website Audit & SEO Report', price: 2500 },
-            socialAudit: { name: 'Social Media Audit & Strategy Session', price: 1800 }
-        };
+        const addons = [
+            { name: 'Press Release Distribution', price: 1200, type: 'monthly', description: 'Distribute professional press releases across major news wires and industry publications. Choose any 2 countries and 5 industries for targeted distribution.' },
+            { name: 'Website Development', price: 2500, type: 'one-time', description: 'Custom professional website design and development optimized for conversions and SEO. Includes mobile-responsive design and basic SEO setup.' },
+            { name: 'Content Creation Package', price: 800, type: 'monthly', description: 'Professional blog posts, case studies, and whitepapers (4/month) to establish thought leadership and improve SEO rankings.' },
+            { name: 'Paid/PPC Advertising Management', price: 1500, type: 'monthly', description: 'Google Ads and LinkedIn Ads management with $2,000 monthly ad spend (not included). Full campaign setup, optimization, and reporting.' },
+            { name: 'SEO (LLM-friendly)', price: 1500, type: 'monthly', description: 'For 5 keywords: keyword rank tracking, competitor tracking, SEO enhancement, Content syndication, keyword ranking' },
+            { name: 'Video Marketing Suite', price: 1800, type: 'monthly', description: 'Professional video production (2 additional videos/month), editing, and distribution across social platforms and your website.' }
+        ];
 
-        // Discount rates
-        const discounts = {
-            monthly: 0,
-            quarterly: 0.05,
-            annual: 0.15
-        };
-
-        // State
-        let selectedPackage = null;
-        let selectedAddons = new Set();
-        let selectedFrequency = 'monthly';
-
-        // DOM Elements
-        const packageCards = document.querySelectorAll('.package-card');
-        const addonsSection = document.querySelector('.addons-section');
-        const addonCheckboxes = document.querySelectorAll('.addon-checkbox input[type="checkbox"]');
+        // DOM elements
+        const packageOptions = document.querySelectorAll('.package-option');
+        const addonsSection = document.getElementById('addonsSection');
+        const addonItems = document.querySelectorAll('.addon-item');
         const paymentOptions = document.querySelectorAll('.payment-option');
+        const totalSection = document.getElementById('totalSection');
+        const totalAmountEl = document.getElementById('totalAmount');
+        const totalBreakdownEl = document.getElementById('totalBreakdown');
         const finalizeBtn = document.getElementById('finalizeBtn');
-        const termsCheckbox = document.getElementById('terms');
         const emailBtn = document.getElementById('emailBtn');
-        const emailSection = document.getElementById('emailSection');
-        const userEmailInput = document.getElementById('userEmail');
-        const sendEmailBtn = document.getElementById('sendEmailBtn');
-        const emailStatus = document.getElementById('emailStatus');
-        const baseTotalEl = document.getElementById('baseTotal');
-        const addonsTotalEl = document.getElementById('addonsTotal');
-        const grandTotalEl = document.getElementById('grandTotal');
-        const modal = document.getElementById('emailModal');
-        const confirmEmailInput = document.getElementById('confirmEmail');
-        const confirmEmailBtn = document.getElementById('confirmEmailBtn');
-        const closeBtn = document.querySelector('.close');
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        const emailModal = document.getElementById('emailModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const sendBtn = document.getElementById('sendBtn');
+        const recipientEmail = document.getElementById('recipientEmail');
+        const loadingSpinner = document.getElementById('loadingSpinner');
         const toast = document.getElementById('toast');
 
         // Initialize
-        updateUI();
-        calculateTotals();
+        initializeEventListeners();
 
-        // Event Listeners
-        packageCards.forEach(card => {
-            card.addEventListener('click', () => selectPackage(card.dataset.package));
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    selectPackage(card.dataset.package);
+        function initializeEventListeners() {
+            // Package selection
+            packageOptions.forEach(option => {
+                option.addEventListener('click', () => selectPackage(option));
+            });
+
+            // Addon selection
+            addonItems.forEach((item, index) => {
+                item.addEventListener('click', () => toggleAddon(item, index));
+            });
+
+            // Payment selection
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => selectPayment(option));
+            });
+
+            // Finalize button
+            finalizeBtn.addEventListener('click', () => {
+                if (selectedPackage && selectedPayment) {
+                    emailBtn.style.display = 'inline-flex';
+                    emailBtn.disabled = !termsCheckbox.checked;
+                    scrollToElement(emailBtn);
                 }
             });
-        });
 
-        addonCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                if (e.target.checked) {
-                    selectedAddons.add(e.target.id);
-                } else {
-                    selectedAddons.delete(e.target.id);
-                }
-                calculateTotals();
+            // Email modal
+            emailBtn.addEventListener('click', () => {
+                emailModal.style.display = 'flex';
+                recipientEmail.focus();
             });
-        });
 
-        paymentOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                paymentOptions.forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
-                const radio = option.querySelector('input[type="radio"]');
-                radio.checked = true;
-                selectedFrequency = radio.value;
-                calculateTotals();
+            closeModal.addEventListener('click', closeEmailModal);
+            cancelBtn.addEventListener('click', closeEmailModal);
+            emailModal.addEventListener('click', (e) => {
+                if (e.target === emailModal) closeEmailModal();
             });
-        });
 
-        finalizeBtn.addEventListener('click', () => {
-            if (selectedPackage) {
-                showToast('Selections finalized! You can now proceed to email your proposal.', 'success');
-                termsCheckbox.disabled = false;
-                emailBtn.disabled = false;
-            }
-        });
+            // Send email
+            sendBtn.addEventListener('click', sendProposalEmail);
 
-        termsCheckbox.addEventListener('change', (e) => {
-            emailSection.classList.toggle('hidden', !e.target.checked);
-            emailBtn.disabled = !e.target.checked;
-        });
+            // Terms checkbox
+            termsCheckbox.addEventListener('change', () => {
+                emailBtn.disabled = !termsCheckbox.checked;
+            });
 
-        emailBtn.addEventListener('click', () => {
-            modal.style.display = 'block';
-            confirmEmailInput.value = '';
-            confirmEmailInput.focus();
-        });
-
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        confirmEmailBtn.addEventListener('click', () => {
-            const email = confirmEmailInput.value.trim();
-            if (email && validateEmail(email)) {
-                modal.style.display = 'none';
-                sendProposalEmail(email);
-            } else {
-                showToast('Please enter a valid email address.', 'error');
-                confirmEmailInput.focus();
-            }
-        });
-
-        userEmailInput.addEventListener('input', (e) => {
-            sendEmailBtn.disabled = !e.target.value || !validateEmail(e.target.value);
-        });
-
-        sendEmailBtn.addEventListener('click', () => {
-            const email = userEmailInput.value.trim();
-            if (email && validateEmail(email)) {
-                sendProposalEmail(email);
-            }
-        });
-
-        // Functions
-        function selectPackage(packageId) {
-            if (selectedPackage === packageId) {
-                // Deselect
-                selectedPackage = null;
-                packageCards.forEach(card => card.classList.remove('selected'));
-                addonsSection.classList.remove('enabled');
-                finalizeBtn.disabled = true;
-                termsCheckbox.checked = false;
-                termsCheckbox.disabled = true;
-                emailBtn.disabled = true;
-                emailSection.classList.add('hidden');
-                showToast('Package selection cleared.', 'warning');
-            } else {
-                // Select new package
-                selectedPackage = packageId;
-                packageCards.forEach(card => card.classList.remove('selected'));
-                document.querySelector(`[data-package="${packageId}"]`).classList.add('selected');
-                addonsSection.classList.add('enabled');
-                finalizeBtn.disabled = false;
-                calculateTotals();
-                showToast(`Selected: ${packages[packageId].name}`, 'success');
-            }
-            updateUI();
+            // Enter key on email input
+            recipientEmail.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendProposalEmail();
+            });
         }
 
-        function updateUI() {
-            // Update totals display
-            calculateTotals();
+        function selectPackage(option) {
+            // Deselect all packages
+            packageOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Select clicked package
+            option.classList.add('selected');
+            selectedPackage = option.dataset.price;
+            const packageKey = option.querySelector('.package-name').textContent.includes('Tier 1') ? 'tier1' : 
+                              option.querySelector('.package-name').textContent.includes('Tier 2') ? 'tier2' : 'tier3';
+            const details = packageDetails[packageKey];
+            
+            // Activate addons section
+            addonsSection.classList.add('active');
+            
+            // Update total
+            calculateTotal();
+            
+            // Enable finalize button if payment is selected
+            if (selectedPayment) {
+                finalizeBtn.disabled = false;
+            }
+            
+            // Update breakdown
+            updateTotalBreakdown(details);
+        }
 
-            // Enable/disable elements based on selection
+        function toggleAddon(item, index) {
+            if (!addonsSection.classList.contains('active')) return;
+            
+            const isSelected = item.classList.contains('selected');
+            
+            if (isSelected) {
+                item.classList.remove('selected');
+                selectedAddons = selectedAddons.filter(addon => addon !== index);
+            } else {
+                item.classList.add('selected');
+                selectedAddons.push(index);
+            }
+            
+            calculateTotal();
+        }
+
+        function selectPayment(option) {
+            // Deselect all payments
+            paymentOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Select clicked payment
+            option.classList.add('selected');
+            selectedPayment = option.querySelector('.payment-label').textContent.toLowerCase().includes('monthly') ? 'monthly' :
+                             option.querySelector('.payment-label').textContent.toLowerCase().includes('quarterly') ? 'quarterly' :
+                             option.querySelector('.payment-label').textContent.toLowerCase().includes('semi-annual') ? 'semi-annual' : 'annual';
+            
+            // Enable finalize button if package is selected
             if (selectedPackage) {
                 finalizeBtn.disabled = false;
-                addonsSection.classList.add('enabled');
-            } else {
-                finalizeBtn.disabled = true;
-                addonsSection.classList.remove('enabled');
             }
+            
+            calculateTotal();
         }
 
-        function calculateTotals() {
-            let basePrice = selectedPackage ? packages[selectedPackage].price : 0;
-            let addonsPrice = 0;
-            selectedAddons.forEach(addonId => {
-                addonsPrice += addons[addonId].price;
-            });
-
-            const discount = discounts[selectedFrequency];
-            const monthlyEquivalent = (basePrice + addonsPrice) * (1 - discount);
-
-            baseTotalEl.textContent = `$${basePrice.toLocaleString()}`;
-            addonsTotalEl.textContent = `$${addonsPrice.toLocaleString()}`;
-            grandTotalEl.textContent = `$${monthlyEquivalent.toLocaleString()}`;
-        }
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        async function sendProposalEmail(email) {
+        function calculateTotal() {
             if (!selectedPackage) {
-                showToast('Please select a base package first.', 'error');
+                totalAmount = 0;
+            } else {
+                let basePrice = parseInt(selectedPackage);
+                let addonPrice = 0;
+                
+                selectedAddons.forEach(addonIndex => {
+                    addonPrice += addons[addonIndex].price;
+                });
+                
+                // Apply payment discounts
+                let discount = 0;
+                switch(selectedPayment) {
+                    case 'quarterly': discount = 0.05; break;
+                    case 'semi-annual': discount = 0.10; break;
+                    case 'annual': discount = 0.15; break;
+                }
+                
+                const discountedBase = basePrice * (1 - discount);
+                totalAmount = Math.round(discountedBase + addonPrice);
+            }
+            
+            totalAmountEl.textContent = `$${totalAmount.toLocaleString()}`;
+            updateTotalBreakdown();
+        }
+
+        function updateTotalBreakdown(details = null) {
+            if (!selectedPackage) {
+                totalBreakdownEl.innerHTML = 'Select a package to see pricing details';
                 return;
             }
+            
+            let breakdown = '';
+            if (details) {
+                breakdown += `<strong>${details.name}</strong><br>`;
+                details.deliverables.forEach(deliverable => {
+                    breakdown += `✓ ${deliverable}<br>`;
+                });
+                if (details.youtubeNote) {
+                    breakdown += `<br><small><i class="fas fa-info-circle"></i> ${details.youtubeNote}</small>`;
+                }
+                breakdown += '<br><br>';
+            }
+            
+            breakdown += `<strong>Base Package:</strong> $${parseInt(selectedPackage).toLocaleString()}<br>`;
+            selectedAddons.forEach(index => {
+                breakdown += `+ ${addons[index].name}: +$${addons[index].price.toLocaleString()}<br>`;
+            });
+            
+            if (selectedPayment !== 'monthly') {
+                const discount = selectedPayment === 'quarterly' ? 5 : selectedPayment === 'semi-annual' ? 10 : 15;
+                breakdown += `<br><em>${discount}% discount for ${selectedPayment} payment</em><br>`;
+            }
+            
+            breakdown += `<br><strong>Total: $${totalAmount.toLocaleString()}</strong>`;
+            
+            totalBreakdownEl.innerHTML = breakdown;
+        }
 
-            sendEmailBtn.innerHTML = '<span class="loading"></span> Sending...';
-            sendEmailBtn.disabled = true;
+        function scrollToElement(element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
 
+        function closeEmailModal() {
+            emailModal.style.display = 'none';
+            recipientEmail.value = '';
+        }
+
+        async function sendProposalEmail() {
+            const email = recipientEmail.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            if (!termsCheckbox.checked) {
+                showToast('Please agree to the Terms & Conditions', 'error');
+                termsCheckbox.focus();
+                return;
+            }
+            
+            // Show loading
+            sendBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+            sendBtn.innerHTML = 'Sending...';
+            
             try {
                 const proposalData = {
                     recipientEmail: email,
-                    selectedPackage: packages[selectedPackage],
-                    selectedAddons: Array.from(selectedAddons).map(id => addons[id]),
-                    selectedFrequency,
-                    totalMonthly: parseFloat(grandTotalEl.textContent.replace(/[$,]/g, '')),
+                    selectedPackage: selectedPackage,
+                    selectedAddons: selectedAddons.map(index => addons[index]),
+                    selectedPayment: selectedPayment,
+                    totalAmount: totalAmount,
+                    packageDetails: packageDetails,
                     clientName: 'Chi Feng Mu',
-                    company: 'BMJ-Machinery',
-                    date: new Date().toISOString().split('T')[0]
+                    company: 'BMJ-Machinery Marketing Solutions'
                 };
-
+                
                 const response = await fetch(`${BACKEND_URL}/api/send-proposal`, {
                     method: 'POST',
                     headers: {
@@ -1085,48 +1236,53 @@
                     },
                     body: JSON.stringify(proposalData)
                 });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    if (result.success) {
-                        showToast('✓ Email sent successfully! Check your inbox for the PDF proposal.', 'success');
-                        userEmailInput.value = '';
-                        sendEmailBtn.innerHTML = 'Send Email with PDF';
-                        emailStatus.innerHTML = '<p style="color: var(--success-color);">Proposal sent successfully!</p>';
-                    } else {
-                        throw new Error(result.message || 'Failed to send email');
-                    }
-                } else {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showToast('✓ Email sent successfully! Check your inbox for the PDF proposal.', 'success');
+                    closeEmailModal();
+                    // Reset form if needed
+                } else {
+                    throw new Error(result.error || 'Failed to send email');
+                }
+                
             } catch (error) {
-                console.error('Email send error:', error);
+                console.error('Error sending email:', error);
                 showToast(`Error: ${error.message}. Please try again or contact support.`, 'error');
-                emailStatus.innerHTML = `<p style="color: var(--danger-color);">Failed to send email. ${error.message}</p>`;
             } finally {
-                sendEmailBtn.innerHTML = 'Send Email with PDF';
-                sendEmailBtn.disabled = !userEmailInput.value || !validateEmail(userEmailInput.value);
+                // Reset button
+                sendBtn.disabled = false;
+                loadingSpinner.style.display = 'none';
+                sendBtn.innerHTML = 'Send Email with PDF';
             }
         }
 
-        function showToast(message, type = 'success') {
+        function showToast(message, type) {
             toast.textContent = message;
-            toast.className = `toast ${type} show`;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+            
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 5000);
         }
 
-        // Keyboard navigation for packages
-        document.addEventListener('keydown', (e) => {
-            if (e.target.classList.contains('package-card') && (e.key === 'Tab' || e.key === 'Enter')) {
-                e.preventDefault();
+        // Health check on load
+        window.addEventListener('load', async () => {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/health`);
+                if (!response.ok) {
+                    console.warn('Backend health check failed');
+                }
+            } catch (error) {
+                console.warn('Cannot reach backend:', error);
+                showToast('Note: Backend connection test failed. Email functionality may not work.', 'error');
             }
-        });
-
-        // Auto-focus on first package card
-        document.addEventListener('DOMContentLoaded', () => {
-            packageCards[0].focus();
         });
     </script>
 </body>
