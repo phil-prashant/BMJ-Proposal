@@ -252,8 +252,11 @@ def create_email_body(proposal_data):
     return html
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
     print("\n🚀 Starting BMJ-Machinery Proposal Email Server...")
-    print(f"📍 Server running on http://localhost:5000")
+    print(f"📍 Server running on port {port}")
     print(f"📧 Emails will be sent from: {SENDER_EMAIL}")
     print(f"📋 CC: {CC_EMAIL}\n")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=port)
+
