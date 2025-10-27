@@ -30,7 +30,7 @@ if not SENDGRID_API_KEY:
     print("⚠️ WARNING: SENDGRID_API_KEY not set. Email functionality will not work.")
     print("Please set SENDGRID_API_KEY environment variable or create a .env file")
 else:
-    print(f"✓ SENDGRID_API_KEY loaded: {SENDGRID_API_KEY[:10]}...")
+    print("✓ SENDGRID_API_KEY loaded successfully")
 
 print(f"✓ Sender: {SENDER_EMAIL}")
 print(f"✓ CC: {CC_EMAIL}")
