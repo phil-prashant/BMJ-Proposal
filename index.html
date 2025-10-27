@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="about:blank">
     <title>Custom Proposal for Chi Feng Mu | BMJ-Machinery Marketing Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,11 +15,12 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            font-weight: 400; /* Default light-medium */
         }
 
         /* Sticky Header */
@@ -46,9 +47,10 @@
         }
 
         .header-section h4 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0.9;
             margin-bottom: 0.25rem;
+            font-weight: 500;
         }
 
         .header-section p {
@@ -97,11 +99,13 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
         header p {
             font-size: 1.2rem;
             opacity: 0.9;
+            font-weight: 400;
         }
 
         .intro {
@@ -117,6 +121,7 @@
             color: #2c3e50;
             margin-bottom: 1rem;
             font-size: 1.8rem;
+            font-weight: 600;
         }
 
         .intro p {
@@ -125,6 +130,7 @@
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.7;
+            font-weight: 400;
         }
 
         /* Base Packages - 3 Columns */
@@ -255,6 +261,7 @@
             margin-bottom: 0.5rem;
             color: #666;
             font-size: 0.9rem;
+            font-weight: 400;
         }
 
         .package-deliverables li i {
@@ -273,6 +280,7 @@
             border-radius: 6px;
             font-size: 0.85rem;
             margin-top: 0.5rem;
+            font-weight: 400;
         }
 
         /* Add-ons Section */
@@ -358,6 +366,7 @@
             color: #666;
             font-size: 0.9rem;
             line-height: 1.5;
+            font-weight: 400;
         }
 
         /* Payment Section */
@@ -436,6 +445,12 @@
             border-radius: 6px;
             margin: 1rem 0;
             font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .note ul {
+            font-size: 0.9rem;
+            font-weight: 400;
         }
 
         .payment-note {
@@ -445,6 +460,7 @@
             margin-top: 1rem;
             font-size: 0.9rem;
             color: #856404;
+            font-weight: 400;
         }
 
         /* Total Footer (Fallback for small screens) */
@@ -481,6 +497,10 @@
             .payment-options {
                 grid-template-columns: 1fr;
             }
+
+            header h1 {
+                font-size: 2rem;
+            }
         }
 
         /* Action Buttons */
@@ -497,7 +517,7 @@
             border: none;
             border-radius: 8px;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -527,6 +547,7 @@
             background: white;
             color: #667eea;
             border: 2px solid #667eea;
+            font-weight: 500;
         }
 
         .btn-secondary:hover:not(:disabled) {
@@ -555,6 +576,7 @@
             font-size: 0.95rem;
             color: #555;
             margin-bottom: 1rem;
+            font-weight: 400;
         }
 
         .terms-checkbox input[type="checkbox"] {
@@ -566,13 +588,18 @@
 
         .terms-text {
             font-size: 0.85rem;
-            line-height: 1.4;
+            line-height: 1.5;
             max-height: 120px;
             overflow-y: auto;
             background: white;
             padding: 1rem;
             border-radius: 6px;
             border: 1px solid #eee;
+            font-weight: 400;
+        }
+
+        .terms-text strong {
+            font-weight: 600;
         }
 
         /* Email Modal */
@@ -650,6 +677,7 @@
             border-radius: 6px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
         }
 
         .email-input-group input:focus {
@@ -672,6 +700,7 @@
             background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
             color: white;
             padding: 0.75rem 1.5rem;
+            font-weight: 500;
         }
 
         .btn-send:hover:not(:disabled) {
@@ -683,6 +712,7 @@
             background: white;
             color: #666;
             border: 2px solid #ddd;
+            font-weight: 500;
         }
 
         .btn-cancel:hover {
@@ -704,6 +734,7 @@
             transition: transform 0.3s ease;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             max-width: 350px;
+            font-family: 'Poppins', sans-serif;
         }
 
         .toast.show {
@@ -744,6 +775,7 @@
             color: #666;
             font-size: 0.9rem;
             margin-top: 3rem;
+            font-weight: 400;
         }
     </style>
 </head>
@@ -929,10 +961,10 @@
         </div>
 
         <div class="action-buttons">
-            <button class="btn btn-secondary" id="finalizeBtn" disabled>
+            <button class="btn btn-secondary" id="finalizeBtn" disabled title="Finalize after selecting package and payment">
                 <i class="fas fa-check-circle"></i> Finalize Selections
             </button>
-            <button class="btn btn-primary" id="emailBtn" disabled style="display: none;">
+            <button class="btn btn-primary" id="emailBtn" disabled style="display: none;" title="Available after finalizing and agreeing to terms">
                 <i class="fas fa-envelope"></i> Email Proposal
             </button>
         </div>
@@ -1103,7 +1135,6 @@
 
         function selectPackage(card) {
             if (finalizeBtn.disabled && !selectedPackage) {
-                // First selection - enable finalize if payment is default
                 updateFinalizeButton();
             }
             packageCards.forEach(c => c.classList.remove('selected'));
@@ -1112,6 +1143,7 @@
             selectedPackageKey = card.dataset.key;
             const details = packageDetails[selectedPackageKey];
             addonsSection.classList.add('active');
+            addonsSection.title = ''; // Clear tooltip when active
             calculateTotal();
             updateHeader();
             updateFinalizeButton();
@@ -1120,7 +1152,7 @@
 
         function toggleAddon(card) {
             if (!addonsSection.classList.contains('active')) {
-                showToast('Please select a base package first to enable add-ons.', 'warning');
+                showToast('Select a base package first to unlock add-ons.', 'warning');
                 return;
             }
             const index = parseInt(card.dataset.index);
@@ -1149,7 +1181,7 @@
 
         function handleFinalizeClick() {
             if (finalizeBtn.disabled) {
-                showToast('Please select a base package and payment term first.', 'warning');
+                showToast('Select a base package and payment term to finalize.', 'warning');
                 return;
             }
             emailBtn.style.display = 'inline-flex';
@@ -1160,8 +1192,9 @@
         function clearAllSelections() {
             packageCards.forEach(c => c.classList.remove('selected'));
             addonCards.forEach(c => c.classList.remove('selected'));
-            paymentOptions[0].classList.add('selected'); // Default to monthly
+            paymentOptions[0].classList.add('selected');
             addonsSection.classList.remove('active');
+            addonsSection.title = 'Add-ons unlock after base package selection';
             selectedPackage = null;
             selectedPackageKey = null;
             selectedAddons = [];
@@ -1252,7 +1285,7 @@
                     selectedPayment: selectedPayment,
                     totalAmount: totalAmount,
                     packageDetails: packageDetails[selectedPackageKey],
-                    clientName: 'Chi Feng Mu',
+                    clientName: 'Chi Feng Mu',  // Hardcoded; add input field for dynamic if needed
                     company: 'BMJ-Machinery Marketing Solutions'
                 };
 
@@ -1285,7 +1318,11 @@
         }
 
         function showToast(message, type = 'success') {
-            toast.textContent = message;
+            if (type !== 'success') {
+                toast.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i> ${message}`;
+            } else {
+                toast.textContent = message;
+            }
             toast.className = `toast ${type}`;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 5000);
