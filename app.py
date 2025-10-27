@@ -119,7 +119,7 @@ def send_proposal():
             file_type='application/pdf',
             disposition='attachment'
         )
-        message.attachment = attachment
+        message.add_attachment(attachment)
         
         # Send email
         sg = SendGridAPIClient(SENDGRID_API_KEY)
