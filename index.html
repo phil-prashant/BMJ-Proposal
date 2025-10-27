@@ -20,7 +20,7 @@
             color: #333;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            font-size: 14px; /* Reduced for standards */
+            font-size: 14px;
             font-weight: 400;
         }
 
@@ -48,7 +48,7 @@
         }
 
         .header-section h4 {
-            font-size: 0.8rem; /* Reduced */
+            font-size: 0.8rem;
             opacity: 0.9;
             margin-bottom: 0.25rem;
             font-weight: 500;
@@ -56,7 +56,7 @@
 
         .header-section p {
             font-weight: 600;
-            font-size: 1rem; /* Reduced */
+            font-size: 1rem;
         }
 
         .header-actions {
@@ -97,14 +97,14 @@
         }
 
         header h1 {
-            font-size: 2.2rem; /* Reduced from 2.5 */
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
 
         header p {
-            font-size: 1.1rem; /* Reduced */
+            font-size: 1.1rem;
             opacity: 0.9;
             font-weight: 400;
         }
@@ -121,13 +121,13 @@
         .intro h2 {
             color: #2c3e50;
             margin-bottom: 1rem;
-            font-size: 1.6rem; /* Reduced */
+            font-size: 1.6rem;
             font-weight: 600;
         }
 
         .intro p {
             color: #666;
-            font-size: 1rem; /* Reduced */
+            font-size: 1rem;
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.7;
@@ -153,13 +153,13 @@
         }
 
         .section-header i {
-            font-size: 1.4rem; /* Reduced */
+            font-size: 1.4rem;
             color: #667eea;
             margin-right: 0.5rem;
         }
 
         .section-header h3 {
-            font-size: 1.4rem; /* Reduced */
+            font-size: 1.4rem;
             color: #2c3e50;
             font-weight: 600;
         }
@@ -222,14 +222,14 @@
 
         .package-name {
             font-weight: 600;
-            font-size: 1.1rem; /* Reduced */
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
             text-align: center;
             color: #2c3e50;
         }
 
         .package-price {
-            font-size: 1.4rem; /* Reduced */
+            font-size: 1.4rem;
             font-weight: 700;
             color: #27ae60;
             text-align: center;
@@ -245,7 +245,7 @@
             color: white;
             padding: 0.25rem 0.5rem;
             border-radius: 12px;
-            font-size: 0.7rem; /* Reduced */
+            font-size: 0.7rem;
             font-weight: 600;
             display: inline-block;
             margin-left: 0.5rem;
@@ -261,7 +261,7 @@
             align-items: flex-start;
             margin-bottom: 0.5rem;
             color: #666;
-            font-size: 0.85rem; /* Reduced */
+            font-size: 0.85rem;
             font-weight: 400;
         }
 
@@ -279,7 +279,7 @@
             color: #0c5460;
             padding: 0.75rem;
             border-radius: 6px;
-            font-size: 0.8rem; /* Reduced */
+            font-size: 0.8rem;
             margin-top: 0.5rem;
             font-weight: 400;
         }
@@ -353,11 +353,11 @@
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 0.5rem;
-            font-size: 1rem; /* Reduced */
+            font-size: 1rem;
         }
 
         .addon-price {
-            font-size: 1.2rem; /* Reduced */
+            font-size: 1.2rem;
             font-weight: 700;
             color: #27ae60;
             margin-bottom: 0.75rem;
@@ -365,7 +365,7 @@
 
         .addon-description {
             color: #666;
-            font-size: 0.85rem; /* Reduced */
+            font-size: 0.85rem;
             line-height: 1.5;
             font-weight: 400;
         }
@@ -436,7 +436,7 @@
         .payment-label {
             font-weight: 500;
             color: #2c3e50;
-            font-size: 0.9rem; /* Reduced */
+            font-size: 0.9rem;
         }
 
         .note {
@@ -446,12 +446,12 @@
             padding: 1rem;
             border-radius: 6px;
             margin: 1rem 0;
-            font-size: 0.85rem; /* Reduced */
+            font-size: 0.85rem;
             font-weight: 400;
         }
 
         .note ul {
-            font-size: 0.85rem; /* Reduced */
+            font-size: 0.85rem;
             font-weight: 400;
         }
 
@@ -460,25 +460,16 @@
             border-left: 4px solid #ffc107;
             padding: 1rem;
             margin-top: 1rem;
-            font-size: 0.85rem; /* Reduced */
+            font-size: 0.85rem;
             color: #856404;
             font-weight: 400;
-        }
-
-        /* Action Buttons - Remove email from here */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
-            flex-wrap: wrap;
         }
 
         .btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 8px;
-            font-size: 1rem; /* Reduced */
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -522,21 +513,36 @@
             cursor: not-allowed;
         }
 
-        /* Terms Section - Non-scrollable, expanded */
+        /* Terms Section - Re-sequenced: Text > Checkbox > Finalize > Email Button */
         .terms-section {
             background: #f8f9fa;
             padding: 1.5rem;
             border-radius: 8px;
-            margin: 1rem 0;
+            margin: 1rem 0 2rem 0;
             border-left: 4px solid #667eea;
             width: 100%;
+        }
+
+        .terms-text {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .terms-text strong {
+            font-weight: 600;
         }
 
         .terms-checkbox {
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            font-size: 0.9rem; /* Reduced */
+            font-size: 0.9rem;
             color: #555;
             margin-bottom: 1rem;
             font-weight: 400;
@@ -549,19 +555,10 @@
             flex-shrink: 0;
         }
 
-        .terms-text {
-            font-size: 0.8rem; /* Reduced */
-            line-height: 1.5;
-            background: white;
-            padding: 1rem;
-            border-radius: 6px;
-            border: 1px solid #eee;
-            font-weight: 400;
-            /* Non-scrollable: no max-height/overflow */
-        }
-
-        .terms-text strong {
-            font-weight: 600;
+        .finalize-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
 
         .terms-button-section {
@@ -571,7 +568,7 @@
             gap: 1rem;
         }
 
-        /* Email Modal - Added name fields */
+        /* Email Modal */
         .email-modal {
             display: none;
             position: fixed;
@@ -605,7 +602,7 @@
         }
 
         .modal-title {
-            font-size: 1.4rem; /* Reduced */
+            font-size: 1.4rem;
             font-weight: 600;
             color: #2c3e50;
         }
@@ -637,7 +634,7 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: #2c3e50;
-            font-size: 0.9rem; /* Reduced */
+            font-size: 0.9rem;
         }
 
         .email-input-group input {
@@ -645,7 +642,7 @@
             padding: 0.75rem;
             border: 2px solid #e0e0e0;
             border-radius: 6px;
-            font-size: 0.95rem; /* Reduced */
+            font-size: 0.95rem;
             transition: border-color 0.3s ease;
             font-family: 'Poppins', sans-serif;
             margin-bottom: 1rem;
@@ -706,7 +703,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             max-width: 350px;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem; /* Reduced */
+            font-size: 0.9rem;
         }
 
         .toast.show {
@@ -745,12 +742,12 @@
             text-align: center;
             padding: 2rem 0;
             color: #666;
-            font-size: 0.85rem; /* Reduced */
+            font-size: 0.85rem;
             margin-top: 3rem;
             font-weight: 400;
         }
 
-        /* Total Footer (Fallback for small screens) */
+        /* Total Footer for Mobile */
         .total-footer {
             position: sticky;
             bottom: 0;
@@ -786,11 +783,11 @@
             }
 
             header h1 {
-                font-size: 1.8rem; /* Further reduced for mobile */
+                font-size: 1.8rem;
             }
 
             body {
-                font-size: 15px; /* Slightly larger on mobile for touch */
+                font-size: 15px;
             }
         }
     </style>
@@ -945,7 +942,7 @@
                 <h3>Payment Terms</h3>
             </div>
             <div class="payment-options">
-                <label class="payment-option" data-payment="monthly">
+                <label class="payment-option selected" data-payment="monthly">
                     <div class="payment-radio"></div>
                     <div class="payment-label">Monthly ($ upfront, auto-renews)</div>
                 </label>
@@ -976,21 +973,8 @@
             </div>
         </div>
 
-        <!-- Finalize Only -->
-        <div class="action-buttons">
-            <button class="btn btn-secondary" id="finalizeBtn" disabled title="Finalize after selecting package and payment">
-                <i class="fas fa-check-circle"></i> Finalize Selections
-            </button>
-        </div>
-
-        <!-- Terms Section with Button at End -->
+        <!-- Re-sequenced Terms Section -->
         <div class="terms-section">
-            <div class="terms-checkbox">
-                <input type="checkbox" id="termsCheckbox">
-                <label for="termsCheckbox">
-                    I have read and agree to the <strong>Terms & Conditions</strong> below:
-                </label>
-            </div>
             <div class="terms-text">
                 <strong>Terms & Conditions</strong><br><br>
                 1. <strong>Services:</strong> BMJ-Machinery Marketing Solutions agrees to provide the digital marketing services as outlined in the selected package(s) and add-ons. All work is Done-For-You (DFY), with our team handling execution based on client-provided materials.<br><br>
@@ -1002,8 +986,19 @@
                 7. <strong>Confidentiality & Data:</strong> Both parties protect shared info. Client data used only for services; compliant with GDPR/CCPA. BMJ not liable for client data breaches on third-party platforms.<br><br>
                 8. <strong>Limitation of Liability:</strong> Liability capped at services paid. No consequential damages. BMJ not responsible for platform changes (e.g., LinkedIn algorithm updates) or client non-compliance.<br><br>
                 9. <strong>Governing Law:</strong> This agreement is governed by the laws of the United States and European Union, with jurisdiction in the federal courts of the United States or relevant EU member state courts.<br><br>
-                10. <strong>Acceptance:</strong> By checking the box and sending, you agree to these terms and authorize commencement upon payment. This proposal valid for 30 days.<br><br>
+                10. <strong>Acceptance:</strong> By checking the box below and finalizing, you agree to these terms and authorize commencement upon payment. This proposal valid for 30 days.<br><br>
                 <em>Contact BMJ for questions. Proposal confidential.</em>
+            </div>
+            <div class="terms-checkbox">
+                <input type="checkbox" id="termsCheckbox">
+                <label for="termsCheckbox">
+                    I have read and agree to the <strong>Terms & Conditions</strong> above:
+                </label>
+            </div>
+            <div class="finalize-section">
+                <button class="btn btn-secondary" id="finalizeBtn" disabled title="Finalize after selecting package, payment, and agreeing to terms">
+                    <i class="fas fa-check-circle"></i> Finalize Selections
+                </button>
             </div>
             <div class="terms-button-section" id="termsButtonSection" style="display: none;">
                 <button class="btn btn-primary" id="emailBtn" disabled title="Available after agreeing to terms">
@@ -1104,273 +1099,4 @@
             }
         };
 
-        const addons = [
-            { name: 'Press Release Distribution', price: 1200, type: 'monthly', description: 'Distribute professional press releases across major news wires and industry publications. Choose any 2 countries and 5 industries for targeted distribution.' },
-            { name: 'Website Development', price: 2500, type: 'one-time', description: 'Custom professional website design and development optimized for conversions and SEO. Includes mobile-responsive design and basic SEO setup.' },
-            { name: 'Content Creation Package', price: 800, type: 'monthly', description: 'Professional blog posts, case studies, and whitepapers (4 pieces/month) to establish thought leadership and improve SEO rankings.' },
-            { name: 'PPC Advertising Management', price: 1500, type: 'monthly', description: 'Google Ads and LinkedIn Ads management with $2,000 monthly ad spend (not included). Full campaign setup, optimization, and reporting.' },
-            { name: 'SEO Optimization Package', price: 1500, type: 'monthly', description: 'Comprehensive SEO services including keyword research, on-page optimization, technical audits, backlink building, LLM-friendly SEO strategies for AI-optimized content (for 5 keywords), and monthly performance reporting to boost organic search rankings.' },
-            { name: 'Intelligent Chatbot', price: 200, type: 'monthly', description: 'AI-powered chatbot for website engagement, lead capture, and 24/7 customer support. Customizable with your branding and integrated with CRM systems for seamless lead management.' }
-        ];
-
-        const paymentTerms = {
-            monthly: { label: 'Monthly', discount: 0 },
-            quarterly: { label: 'Quarterly (5% off)', discount: 0.05 },
-            'semi-annual': { label: 'Semi-Annual (10% off)', discount: 0.10 },
-            annual: { label: 'Annual (15% off)', discount: 0.15 }
-        };
-
-        // DOM elements
-        const packageCards = document.querySelectorAll('.package-card');
-        const addonsSection = document.getElementById('addonsSection');
-        const addonCards = document.querySelectorAll('.addon-card');
-        const paymentOptions = document.querySelectorAll('.payment-option');
-        const finalizeBtn = document.getElementById('finalizeBtn');
-        const emailBtn = document.getElementById('emailBtn');
-        const termsButtonSection = document.getElementById('termsButtonSection');
-        const clearBtn = document.getElementById('clearBtn');
-        const termsCheckbox = document.getElementById('termsCheckbox');
-        const emailModal = document.getElementById('emailModal');
-        const closeModal = document.getElementById('closeModal');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const sendBtn = document.getElementById('sendBtn');
-        const firstName = document.getElementById('firstName');
-        const lastName = document.getElementById('lastName');
-        const recipientEmail = document.getElementById('recipientEmail');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const toast = document.getElementById('toast');
-        const headerPackage = document.getElementById('header-package');
-        const headerAmount = document.getElementById('header-amount');
-        const headerPayment = document.getElementById('header-payment');
-        const mobileTotal = document.getElementById('mobile-total');
-
-        // Initialize
-        initializeEventListeners();
-        updateHeader();
-
-        function initializeEventListeners() {
-            packageCards.forEach((card) => card.addEventListener('click', () => selectPackage(card)));
-            addonCards.forEach(card => card.addEventListener('click', () => toggleAddon(card)));
-            paymentOptions.forEach(option => option.addEventListener('click', () => selectPayment(option)));
-            finalizeBtn.addEventListener('click', handleFinalizeClick);
-            clearBtn.addEventListener('click', clearAllSelections);
-            emailBtn.addEventListener('click', openEmailModal);
-            closeModal.addEventListener('click', closeEmailModal);
-            cancelBtn.addEventListener('click', closeEmailModal);
-            sendBtn.addEventListener('click', handleSendClick);
-            emailModal.addEventListener('click', (e) => { if (e.target === emailModal) closeEmailModal(); });
-            termsCheckbox.addEventListener('change', updateEmailButton);
-            firstName.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendClick(); });
-            lastName.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendClick(); });
-            recipientEmail.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendClick(); });
-            window.addEventListener('load', checkBackendHealth);
-        }
-
-        function selectPackage(card) {
-            packageCards.forEach(c => c.classList.remove('selected'));
-            card.classList.add('selected');
-            selectedPackage = parseInt(card.dataset.price);
-            selectedPackageKey = card.dataset.key;
-            const details = packageDetails[selectedPackageKey];
-            addonsSection.classList.add('active');
-            calculateTotal();
-            updateHeader();
-            updateFinalizeButton();
-            showToast(`Selected: ${details.name}. Now add services below!`, 'success');
-        }
-
-        function toggleAddon(card) {
-            if (!addonsSection.classList.contains('active')) {
-                showToast('Select a base package first to unlock add-ons.', 'warning');
-                return;
-            }
-            const index = parseInt(card.dataset.index);
-            const isSelected = card.classList.contains('selected');
-            if (isSelected) {
-                card.classList.remove('selected');
-                selectedAddons = selectedAddons.filter(i => i !== index);
-            } else {
-                card.classList.add('selected');
-                selectedAddons.push(index);
-            }
-            calculateTotal();
-            updateHeader();
-            showToast(isSelected ? `${addons[index].name} removed.` : `${addons[index].name} added to your package!`, isSelected ? 'warning' : 'success');
-        }
-
-        function selectPayment(option) {
-            paymentOptions.forEach(opt => opt.classList.remove('selected'));
-            option.classList.add('selected');
-            selectedPayment = option.dataset.payment;
-            calculateTotal();
-            updateHeader();
-            updateFinalizeButton();
-            showToast(`Payment updated to ${paymentTerms[selectedPayment].label}.`, 'success');
-        }
-
-        function handleFinalizeClick() {
-            if (finalizeBtn.disabled) {
-                showToast('Select a base package and payment term to finalize.', 'warning');
-                return;
-            }
-            termsButtonSection.style.display = 'flex';
-            updateEmailButton();
-            showToast('Selections finalized! Agree to terms and enter details to send.', 'success');
-            termsCheckbox.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function clearAllSelections() {
-            packageCards.forEach(c => c.classList.remove('selected'));
-            addonCards.forEach(c => c.classList.remove('selected'));
-            paymentOptions[0].classList.add('selected');
-            addonsSection.classList.remove('active');
-            selectedPackage = null;
-            selectedPackageKey = null;
-            selectedAddons = [];
-            selectedPayment = 'monthly';
-            totalAmount = 0;
-            calculateTotal();
-            updateHeader();
-            finalizeBtn.disabled = true;
-            termsButtonSection.style.display = 'none';
-            termsCheckbox.checked = false;
-            emailBtn.disabled = true;
-            showToast('All selections cleared. Start by choosing a package.', 'warning');
-        }
-
-        function openEmailModal() {
-            if (emailBtn.disabled) {
-                showToast('Please agree to the Terms & Conditions first.', 'warning');
-                return;
-            }
-            emailModal.style.display = 'flex';
-            firstName.focus();
-        }
-
-        function closeEmailModal() {
-            emailModal.style.display = 'none';
-            firstName.value = '';
-            lastName.value = '';
-            recipientEmail.value = '';
-        }
-
-        function updateEmailButton() {
-            const isEnabled = termsCheckbox.checked;
-            emailBtn.disabled = !isEnabled;
-            if (isEnabled) {
-                emailBtn.title = '';
-            } else {
-                emailBtn.title = 'Agree to terms to enable';
-            }
-        }
-
-        function updateFinalizeButton() {
-            finalizeBtn.disabled = !selectedPackage || !selectedPayment;
-        }
-
-        function calculateTotal() {
-            if (!selectedPackage) {
-                totalAmount = 0;
-            } else {
-                let basePrice = selectedPackage;
-                let addonPrice = selectedAddons.reduce((sum, idx) => sum + addons[idx].price, 0);
-                const discount = paymentTerms[selectedPayment].discount;
-                const discountedBase = basePrice * (1 - discount);
-                totalAmount = Math.round(discountedBase + addonPrice);
-            }
-            headerAmount.textContent = `$${totalAmount.toLocaleString()}/mo`;
-            mobileTotal.textContent = `Total: $${totalAmount.toLocaleString()} | ${selectedPackage ? packageDetails[selectedPackageKey].name : 'No Package Selected'}`;
-        }
-
-        function updateHeader() {
-            headerPackage.textContent = selectedPackage ? packageDetails[selectedPackageKey].name : 'None Selected';
-            headerPayment.textContent = paymentTerms[selectedPayment].label;
-        }
-
-        async function checkBackendHealth() {
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/health`);
-                if (!response.ok) throw new Error('Backend unhealthy');
-                console.log('Backend is healthy');
-            } catch (error) {
-                console.warn('Backend check failed:', error);
-                showToast('Note: Email service may be unavailable. Contact support if issues persist.', 'warning');
-            }
-        }
-
-        async function handleSendClick() {
-            const fname = firstName.value.trim();
-            const lname = lastName.value.trim();
-            const email = recipientEmail.value.trim();
-            if (!fname || !lname || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showToast('Please enter valid first name, last name, and email.', 'error');
-                if (!fname) firstName.focus();
-                else if (!lname) lastName.focus();
-                else recipientEmail.focus();
-                return;
-            }
-            if (!termsCheckbox.checked) {
-                showToast('Please agree to the Terms & Conditions.', 'error');
-                termsCheckbox.focus();
-                return;
-            }
-
-            sendBtn.disabled = true;
-            loadingSpinner.style.display = 'inline-block';
-            sendBtn.innerHTML = '<span class="loading"></span>Sending...';
-
-            try {
-                const proposalData = {
-                    firstname: fname,
-                    lastname: lname,
-                    recipientEmail: email,
-                    selectedPackage: selectedPackageKey,
-                    selectedAddons: selectedAddons.map(idx => addons[idx]),
-                    selectedPayment: selectedPayment,
-                    totalAmount: totalAmount,
-                    packageDetails: packageDetails[selectedPackageKey],
-                    clientName: `${fname} ${lname}`,  // Combined for greeting
-                    company: 'BMJ-Machinery Marketing Solutions'
-                };
-
-                const response = await fetch(`${BACKEND_URL}/api/send-proposal`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(proposalData)
-                });
-
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Server error ${response.status}: ${errorText}`);
-                }
-
-                const result = await response.json();
-                if (result.success) {
-                    showToast(`Proposal sent to ${email}! Check inbox (and spam) for PDF.`, 'success');
-                    closeEmailModal();
-                } else {
-                    throw new Error(result.error || 'Unknown server error');
-                }
-            } catch (error) {
-                console.error('Send email error:', error);
-                showToast(`Failed to send: ${error.message}. Retry or contact support.`, 'error');
-            } finally {
-                sendBtn.disabled = false;
-                loadingSpinner.style.display = 'none';
-                sendBtn.innerHTML = 'Send Email with PDF';
-            }
-        }
-
-        function showToast(message, type = 'success') {
-            if (type !== 'success') {
-                toast.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i> ${message}`;
-            } else {
-                toast.textContent = message;
-            }
-            toast.className = `toast ${type}`;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 5000);
-        }
-    </script>
-</body>
-</html>
+        const addons =
