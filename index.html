@@ -20,7 +20,8 @@
             color: #333;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            font-weight: 400; /* Default light-medium */
+            font-size: 14px; /* Reduced for standards */
+            font-weight: 400;
         }
 
         /* Sticky Header */
@@ -47,7 +48,7 @@
         }
 
         .header-section h4 {
-            font-size: 0.85rem;
+            font-size: 0.8rem; /* Reduced */
             opacity: 0.9;
             margin-bottom: 0.25rem;
             font-weight: 500;
@@ -55,7 +56,7 @@
 
         .header-section p {
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Reduced */
         }
 
         .header-actions {
@@ -96,14 +97,14 @@
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem; /* Reduced from 2.5 */
             font-weight: 700;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
 
         header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Reduced */
             opacity: 0.9;
             font-weight: 400;
         }
@@ -120,13 +121,13 @@
         .intro h2 {
             color: #2c3e50;
             margin-bottom: 1rem;
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* Reduced */
             font-weight: 600;
         }
 
         .intro p {
             color: #666;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Reduced */
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.7;
@@ -152,13 +153,13 @@
         }
 
         .section-header i {
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* Reduced */
             color: #667eea;
             margin-right: 0.5rem;
         }
 
         .section-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* Reduced */
             color: #2c3e50;
             font-weight: 600;
         }
@@ -221,14 +222,14 @@
 
         .package-name {
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Reduced */
             margin-bottom: 0.5rem;
             text-align: center;
             color: #2c3e50;
         }
 
         .package-price {
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* Reduced */
             font-weight: 700;
             color: #27ae60;
             text-align: center;
@@ -244,7 +245,7 @@
             color: white;
             padding: 0.25rem 0.5rem;
             border-radius: 12px;
-            font-size: 0.75rem;
+            font-size: 0.7rem; /* Reduced */
             font-weight: 600;
             display: inline-block;
             margin-left: 0.5rem;
@@ -260,7 +261,7 @@
             align-items: flex-start;
             margin-bottom: 0.5rem;
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduced */
             font-weight: 400;
         }
 
@@ -278,7 +279,7 @@
             color: #0c5460;
             padding: 0.75rem;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem; /* Reduced */
             margin-top: 0.5rem;
             font-weight: 400;
         }
@@ -352,11 +353,11 @@
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Reduced */
         }
 
         .addon-price {
-            font-size: 1.3rem;
+            font-size: 1.2rem; /* Reduced */
             font-weight: 700;
             color: #27ae60;
             margin-bottom: 0.75rem;
@@ -364,7 +365,7 @@
 
         .addon-description {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduced */
             line-height: 1.5;
             font-weight: 400;
         }
@@ -435,6 +436,7 @@
         .payment-label {
             font-weight: 500;
             color: #2c3e50;
+            font-size: 0.9rem; /* Reduced */
         }
 
         .note {
@@ -444,12 +446,12 @@
             padding: 1rem;
             border-radius: 6px;
             margin: 1rem 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduced */
             font-weight: 400;
         }
 
         .note ul {
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduced */
             font-weight: 400;
         }
 
@@ -458,52 +460,12 @@
             border-left: 4px solid #ffc107;
             padding: 1rem;
             margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduced */
             color: #856404;
             font-weight: 400;
         }
 
-        /* Total Footer (Fallback for small screens) */
-        .total-footer {
-            position: sticky;
-            bottom: 0;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            z-index: 100;
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .total-footer {
-                display: block;
-            }
-
-            .header-info {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
-            }
-
-            .packages-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .addons-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .payment-options {
-                grid-template-columns: 1fr;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Action Buttons */
+        /* Action Buttons - Remove email from here */
         .action-buttons {
             display: flex;
             gap: 1rem;
@@ -516,7 +478,7 @@
             padding: 1rem 2rem;
             border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Reduced */
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -560,20 +522,21 @@
             cursor: not-allowed;
         }
 
-        /* Terms Section */
+        /* Terms Section - Non-scrollable, expanded */
         .terms-section {
             background: #f8f9fa;
             padding: 1.5rem;
             border-radius: 8px;
             margin: 1rem 0;
             border-left: 4px solid #667eea;
+            width: 100%;
         }
 
         .terms-checkbox {
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem; /* Reduced */
             color: #555;
             margin-bottom: 1rem;
             font-weight: 400;
@@ -587,22 +550,28 @@
         }
 
         .terms-text {
-            font-size: 0.85rem;
+            font-size: 0.8rem; /* Reduced */
             line-height: 1.5;
-            max-height: 120px;
-            overflow-y: auto;
             background: white;
             padding: 1rem;
             border-radius: 6px;
             border: 1px solid #eee;
             font-weight: 400;
+            /* Non-scrollable: no max-height/overflow */
         }
 
         .terms-text strong {
             font-weight: 600;
         }
 
-        /* Email Modal */
+        .terms-button-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 1rem;
+        }
+
+        /* Email Modal - Added name fields */
         .email-modal {
             display: none;
             position: fixed;
@@ -636,7 +605,7 @@
         }
 
         .modal-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* Reduced */
             font-weight: 600;
             color: #2c3e50;
         }
@@ -660,7 +629,7 @@
         }
 
         .email-input-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .email-input-group label {
@@ -668,6 +637,7 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: #2c3e50;
+            font-size: 0.9rem; /* Reduced */
         }
 
         .email-input-group input {
@@ -675,9 +645,10 @@
             padding: 0.75rem;
             border: 2px solid #e0e0e0;
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: 0.95rem; /* Reduced */
             transition: border-color 0.3s ease;
             font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
         }
 
         .email-input-group input:focus {
@@ -735,6 +706,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             max-width: 350px;
             font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem; /* Reduced */
         }
 
         .toast.show {
@@ -773,9 +745,53 @@
             text-align: center;
             padding: 2rem 0;
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduced */
             margin-top: 3rem;
             font-weight: 400;
+        }
+
+        /* Total Footer (Fallback for small screens) */
+        .total-footer {
+            position: sticky;
+            bottom: 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            z-index: 100;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .total-footer {
+                display: block;
+            }
+
+            .header-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8rem; /* Further reduced for mobile */
+            }
+
+            body {
+                font-size: 15px; /* Slightly larger on mobile for touch */
+            }
         }
     </style>
 </head>
@@ -948,7 +964,7 @@
             </div>
             <div class="note">
                 <i class="fas fa-info-circle"></i> All packages include:
-                <ul style="margin-top: 0.5rem; padding-left: 1.5rem; font-size: 0.9rem;">
+                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
                     <li>Payment due within 7 days of invoice date</li>
                     <li>Setup fees apply only for new terms (quarterly, semi-annual, annual)</li>
                     <li>Strategy session with account manager within 48 hours of contract signing</li>
@@ -960,15 +976,14 @@
             </div>
         </div>
 
+        <!-- Finalize Only -->
         <div class="action-buttons">
             <button class="btn btn-secondary" id="finalizeBtn" disabled title="Finalize after selecting package and payment">
                 <i class="fas fa-check-circle"></i> Finalize Selections
             </button>
-            <button class="btn btn-primary" id="emailBtn" disabled style="display: none;" title="Available after finalizing and agreeing to terms">
-                <i class="fas fa-envelope"></i> Email Proposal
-            </button>
         </div>
 
+        <!-- Terms Section with Button at End -->
         <div class="terms-section">
             <div class="terms-checkbox">
                 <input type="checkbox" id="termsCheckbox">
@@ -978,17 +993,22 @@
             </div>
             <div class="terms-text">
                 <strong>Terms & Conditions</strong><br><br>
-                1. <strong>Services:</strong> BMJ-Machinery Marketing Solutions agrees to provide the digital marketing services as outlined in the selected package(s) and add-ons.<br>
-                2. <strong>Payment:</strong> All payments are due upfront. Services commence only after payment is received and cleared. Late payments may result in service suspension.<br>
-                3. <strong>Term & Termination:</strong> Monthly contracts auto-renew. Quarterly, semi-annual, and annual contracts require 30 days written notice for cancellation. Early termination incurs a 50% fee of remaining contract value.<br>
-                4. <strong>Performance:</strong> We use industry best practices but cannot guarantee specific results (leads, sales, rankings) due to external factors. Monthly reports will detail activities and performance metrics.<br>
-                5. <strong>Content Ownership:</strong> Client retains ownership of all provided content. BMJ retains rights to use anonymized case studies for marketing purposes.<br>
-                6. <strong>Confidentiality:</strong> Both parties agree to maintain confidentiality of proprietary information shared during the engagement.<br>
-                7. <strong>Limitation of Liability:</strong> BMJ's liability is limited to the value of services paid. We are not responsible for third-party platform changes or algorithm updates.<br>
-                8. <strong>Force Majeure:</strong> Neither party is liable for delays due to events beyond reasonable control.<br>
-                9. <strong>Governing Law:</strong> This agreement is governed by the laws of [Your State/Country].<br>
-                10. <strong>Acceptance:</strong> By selecting "Send Email with PDF" you agree to these terms and authorize BMJ to begin work upon payment receipt.<br><br>
-                <em>This proposal is valid for 30 days from creation date.</em>
+                1. <strong>Services:</strong> BMJ-Machinery Marketing Solutions agrees to provide the digital marketing services as outlined in the selected package(s) and add-ons. All work is Done-For-You (DFY), with our team handling execution based on client-provided materials.<br><br>
+                2. <strong>Assumptions:</strong> Client will provide necessary assets (e.g., logos, content, raw videos for YouTube) within 5 business days of contract signing. We assume access to client’s LinkedIn/Email accounts for management (with secure handover). Campaigns target industries/countries specified; no guarantees on third-party platform approvals (e.g., LinkedIn policies).<br><br>
+                3. <strong>Payment:</strong> All payments are due upfront via invoice. Services commence only after payment clearance. Late payments (over 7 days) incur 1.5% monthly interest and may suspend services. Refunds only for unused monthly portions in case of early termination (prorated).<br><br>
+                4. <strong>Term & Termination:</strong> Monthly auto-renews; quarterly/semi-annual/annual require 30 days written notice. Early termination fees: 50% of remaining value. Force majeure (e.g., platform outages) pauses obligations without penalty.<br><br>
+                5. <strong>Performance & Reporting:</strong> We use best practices but cannot guarantee results (e.g., lead volume, rankings) due to algorithms/external factors. Monthly reports include metrics (outreaches, engagement, traffic). Client approves content before posting (48-hour response required).<br><br>
+                6. <strong>Content Ownership & Approvals:</strong> Client owns all content/assets. BMJ retains rights to anonymized case studies. All deliverables (posts, emails) require client approval; unapproved work proceeds at BMJ discretion after 48 hours.<br><br>
+                7. <strong>Confidentiality & Data:</strong> Both parties protect shared info. Client data used only for services; compliant with GDPR/CCPA. BMJ not liable for client data breaches on third-party platforms.<br><br>
+                8. <strong>Limitation of Liability:</strong> Liability capped at services paid. No consequential damages. BMJ not responsible for platform changes (e.g., LinkedIn algorithm updates) or client non-compliance.<br><br>
+                9. <strong>Governing Law:</strong> This agreement is governed by the laws of the United States and European Union, with jurisdiction in the federal courts of the United States or relevant EU member state courts.<br><br>
+                10. <strong>Acceptance:</strong> By checking the box and sending, you agree to these terms and authorize commencement upon payment. This proposal valid for 30 days.<br><br>
+                <em>Contact BMJ for questions. Proposal confidential.</em>
+            </div>
+            <div class="terms-button-section" id="termsButtonSection" style="display: none;">
+                <button class="btn btn-primary" id="emailBtn" disabled title="Available after agreeing to terms">
+                    <i class="fas fa-envelope"></i> Email Proposal
+                </button>
             </div>
         </div>
 
@@ -1002,7 +1022,7 @@
         <div id="mobile-total">Total: $0 | No Package Selected</div>
     </div>
 
-    <!-- Email Modal -->
+    <!-- Email Modal with Name Fields -->
     <div class="email-modal" id="emailModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1012,8 +1032,16 @@
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
             <div class="email-input-group">
-                <label for="recipientEmail">Your Email Address:</label>
-                <input type="email" id="recipientEmail" placeholder="Enter your email address" required>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" placeholder="Enter first name" required>
+            </div>
+            <div class="email-input-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" placeholder="Enter last name" required>
+            </div>
+            <div class="email-input-group">
+                <label for="recipientEmail">Email Address:</label>
+                <input type="email" id="recipientEmail" placeholder="Enter email address" required>
             </div>
             <div class="modal-actions">
                 <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
@@ -1099,12 +1127,15 @@
         const paymentOptions = document.querySelectorAll('.payment-option');
         const finalizeBtn = document.getElementById('finalizeBtn');
         const emailBtn = document.getElementById('emailBtn');
+        const termsButtonSection = document.getElementById('termsButtonSection');
         const clearBtn = document.getElementById('clearBtn');
         const termsCheckbox = document.getElementById('termsCheckbox');
         const emailModal = document.getElementById('emailModal');
         const closeModal = document.getElementById('closeModal');
         const cancelBtn = document.getElementById('cancelBtn');
         const sendBtn = document.getElementById('sendBtn');
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
         const recipientEmail = document.getElementById('recipientEmail');
         const loadingSpinner = document.getElementById('loadingSpinner');
         const toast = document.getElementById('toast');
@@ -1118,7 +1149,7 @@
         updateHeader();
 
         function initializeEventListeners() {
-            packageCards.forEach((card, index) => card.addEventListener('click', () => selectPackage(card, index)));
+            packageCards.forEach((card) => card.addEventListener('click', () => selectPackage(card)));
             addonCards.forEach(card => card.addEventListener('click', () => toggleAddon(card)));
             paymentOptions.forEach(option => option.addEventListener('click', () => selectPayment(option)));
             finalizeBtn.addEventListener('click', handleFinalizeClick);
@@ -1129,21 +1160,19 @@
             sendBtn.addEventListener('click', handleSendClick);
             emailModal.addEventListener('click', (e) => { if (e.target === emailModal) closeEmailModal(); });
             termsCheckbox.addEventListener('change', updateEmailButton);
+            firstName.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendClick(); });
+            lastName.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendClick(); });
             recipientEmail.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendClick(); });
             window.addEventListener('load', checkBackendHealth);
         }
 
         function selectPackage(card) {
-            if (finalizeBtn.disabled && !selectedPackage) {
-                updateFinalizeButton();
-            }
             packageCards.forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
             selectedPackage = parseInt(card.dataset.price);
             selectedPackageKey = card.dataset.key;
             const details = packageDetails[selectedPackageKey];
             addonsSection.classList.add('active');
-            addonsSection.title = ''; // Clear tooltip when active
             calculateTotal();
             updateHeader();
             updateFinalizeButton();
@@ -1184,9 +1213,10 @@
                 showToast('Select a base package and payment term to finalize.', 'warning');
                 return;
             }
-            emailBtn.style.display = 'inline-flex';
+            termsButtonSection.style.display = 'flex';
             updateEmailButton();
-            showToast('Selections finalized! Enter your email to send the proposal.', 'success');
+            showToast('Selections finalized! Agree to terms and enter details to send.', 'success');
+            termsCheckbox.scrollIntoView({ behavior: 'smooth' });
         }
 
         function clearAllSelections() {
@@ -1194,7 +1224,6 @@
             addonCards.forEach(c => c.classList.remove('selected'));
             paymentOptions[0].classList.add('selected');
             addonsSection.classList.remove('active');
-            addonsSection.title = 'Add-ons unlock after base package selection';
             selectedPackage = null;
             selectedPackageKey = null;
             selectedAddons = [];
@@ -1203,8 +1232,9 @@
             calculateTotal();
             updateHeader();
             finalizeBtn.disabled = true;
-            emailBtn.style.display = 'none';
+            termsButtonSection.style.display = 'none';
             termsCheckbox.checked = false;
+            emailBtn.disabled = true;
             showToast('All selections cleared. Start by choosing a package.', 'warning');
         }
 
@@ -1214,16 +1244,24 @@
                 return;
             }
             emailModal.style.display = 'flex';
-            recipientEmail.focus();
+            firstName.focus();
         }
 
         function closeEmailModal() {
             emailModal.style.display = 'none';
+            firstName.value = '';
+            lastName.value = '';
             recipientEmail.value = '';
         }
 
         function updateEmailButton() {
-            emailBtn.disabled = !termsCheckbox.checked;
+            const isEnabled = termsCheckbox.checked;
+            emailBtn.disabled = !isEnabled;
+            if (isEnabled) {
+                emailBtn.title = '';
+            } else {
+                emailBtn.title = 'Agree to terms to enable';
+            }
         }
 
         function updateFinalizeButton() {
@@ -1261,10 +1299,14 @@
         }
 
         async function handleSendClick() {
+            const fname = firstName.value.trim();
+            const lname = lastName.value.trim();
             const email = recipientEmail.value.trim();
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showToast('Please enter a valid email address.', 'error');
-                recipientEmail.focus();
+            if (!fname || !lname || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('Please enter valid first name, last name, and email.', 'error');
+                if (!fname) firstName.focus();
+                else if (!lname) lastName.focus();
+                else recipientEmail.focus();
                 return;
             }
             if (!termsCheckbox.checked) {
@@ -1279,13 +1321,15 @@
 
             try {
                 const proposalData = {
+                    firstname: fname,
+                    lastname: lname,
                     recipientEmail: email,
                     selectedPackage: selectedPackageKey,
                     selectedAddons: selectedAddons.map(idx => addons[idx]),
                     selectedPayment: selectedPayment,
                     totalAmount: totalAmount,
                     packageDetails: packageDetails[selectedPackageKey],
-                    clientName: 'Chi Feng Mu',  // Hardcoded; add input field for dynamic if needed
+                    clientName: `${fname} ${lname}`,  // Combined for greeting
                     company: 'BMJ-Machinery Marketing Solutions'
                 };
 
@@ -1302,14 +1346,14 @@
 
                 const result = await response.json();
                 if (result.success) {
-                    showToast('Proposal sent successfully! Check your inbox (and spam) for the PDF.', 'success');
+                    showToast(`Proposal sent to ${email}! Check inbox (and spam) for PDF.`, 'success');
                     closeEmailModal();
                 } else {
                     throw new Error(result.error || 'Unknown server error');
                 }
             } catch (error) {
                 console.error('Send email error:', error);
-                showToast(`Failed to send proposal: ${error.message}. Please try again or contact support.`, 'error');
+                showToast(`Failed to send: ${error.message}. Retry or contact support.`, 'error');
             } finally {
                 sendBtn.disabled = false;
                 loadingSpinner.style.display = 'none';
