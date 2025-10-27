@@ -49,16 +49,20 @@ def send_proposal():
         
         # Calculate discount and payment details
         discount_rates = {'monthly': 0, 'quarterly': 0.05, 'annual': 0.15}
-        discount = discount_rates.get(selected_frequency, 0) * 100
-        discounted_monthly = total_monthly
+        discount_rate = discount_rates.get(selected_frequency, 0)
+        discount = discount_rate * 100
         
-        # Calculate first payment based on frequency
+        # Calculate base monthly total (before discount)
+        base_monthly = selected_package.get('price', 0) + sum(addon.get('price', 0) for addon in selected_addons)
+        discounted_monthly = base_monthly * (1 - discount_rate)
+        
+        # Calculate first payment based on frequency (after discount)
         if selected_frequency == 'monthly':
-            first_payment = total_monthly
+            first_payment = discounted_monthly
         elif selected_frequency == 'quarterly':
-            first_payment = total_monthly * 3
+            first_payment = discounted_monthly * 3
         else:  # annual
-            first_payment = total_monthly * 12
+            first_payment = discounted_monthly * 12
         
         # Calculate total prospects
         package_prospects = {
@@ -71,7 +75,7 @@ def send_proposal():
         # Build proposal_data in expected format
         proposal_data = {
             'packageName': selected_package.get('name', ''),
-            'monthlyTotal': selected_package.get('price', 0) + sum(addon.get('price', 0) for addon in selected_addons),
+            'monthlyTotal': base_monthly,
             'paymentTerm': selected_frequency,
             'discount': discount,
             'discountedMonthly': discounted_monthly,
