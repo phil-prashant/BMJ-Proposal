@@ -22,7 +22,7 @@ SENDER_NAME = 'Elena from NeoticAI'
 CC_EMAIL = 'work@neoticai.com'
 
 if SENDGRID_API_KEY:
-    print(f"✓ SENDGRID_API_KEY loaded: {SENDGRID_API_KEY[:10]}...")
+    print("✓ SENDGRID_API_KEY loaded successfully")
 else:
     print("⚠ WARNING: SENDGRID_API_KEY not set in environment variables")
 print(f"✓ Sender: {SENDER_EMAIL}")
