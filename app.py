@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail, Email, To, Cc
+from sendgrid.helpers.mail import Mail, Email, To, Cc, Attachment
 import os
 from datetime import datetime
 import base64
@@ -34,13 +34,60 @@ def health_check():
         'sender_email': SENDER_EMAIL
     })
 
-@app.route('/api/send-email', methods=['POST'])
-def send_email():
+@app.route('/api/send-proposal', methods=['POST'])
+def send_proposal():
     """Send proposal email with PDF attachment"""
     try:
         data = request.json
         recipient_email = data.get('recipientEmail')
-        proposal_data = data.get('proposalData')
+        
+        # Transform frontend data structure to match backend expectations
+        package_details = data.get('packageDetails', {})
+        selected_payment = data.get('selectedPayment', 'monthly')
+        total_amount = data.get('totalAmount', 0)
+        
+        # Calculate payment terms
+        payment_terms = {
+            'monthly': {'label': 'Monthly', 'discount': 0},
+            'quarterly': {'label': 'Quarterly', 'discount': 0.05},
+            'semi-annual': {'label': 'Semi-Annual', 'discount': 0.10},
+            'annual': {'label': 'Annual', 'discount': 0.15}
+        }
+        
+        payment_info = payment_terms.get(selected_payment, payment_terms['monthly'])
+        base_price = package_details.get('price', 0)
+        discount_percent = int(payment_info['discount'] * 100)
+        
+        # Calculate first payment based on payment term
+        multiplier = {'monthly': 1, 'quarterly': 3, 'semi-annual': 6, 'annual': 12}
+        first_payment = total_amount * multiplier.get(selected_payment, 1)
+        
+        # Calculate total prospects from deliverables
+        prospects = 0
+        deliverables = package_details.get('deliverables', [])
+        for deliverable in deliverables:
+            if 'outreach' in deliverable.lower():
+                # Extract the number from strings like "600 outreaches on LinkedIn"
+                try:
+                    number = int(deliverable.split()[0])
+                    prospects += number
+                except (ValueError, IndexError):
+                    pass
+        
+        # Build proposal data in the format the PDF/email functions expect
+        proposal_data = {
+            'recipientEmail': recipient_email,
+            'packageName': package_details.get('name', 'N/A'),
+            'monthlyTotal': total_amount,
+            'paymentTerm': payment_info['label'],
+            'discount': discount_percent,
+            'discountedMonthly': total_amount,
+            'firstPayment': first_payment,
+            'addons': data.get('selectedAddons', []),
+            'prospects': prospects,
+            'clientName': data.get('clientName', 'Valued Client'),
+            'company': data.get('company', 'BMJ-Machinery')
+        }
         
         print(f"\n📧 Processing email request...")
         print(f"To: {recipient_email}")
@@ -66,12 +113,13 @@ def send_email():
         message.cc = [Cc(CC_EMAIL)]
         
         # Add PDF attachment
-        message.attachment = [{
-            'content': pdf_base64,
-            'type': 'application/pdf',
-            'filename': 'BMJ-Machinery-Proposal.pdf',
-            'disposition': 'attachment'
-        }]
+        attachment = Attachment(
+            file_content=pdf_base64,
+            file_name='BMJ-Machinery-Proposal.pdf',
+            file_type='application/pdf',
+            disposition='attachment'
+        )
+        message.add_attachment(attachment)
         
         # Send email
         sg = SendGridAPIClient(SENDGRID_API_KEY)
