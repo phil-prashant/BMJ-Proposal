@@ -11,17 +11,27 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Configuration
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', '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')
-SENDER_EMAIL = 'elena@neoticai.email'
-SENDER_NAME = 'Elena from NeoticAI'
-CC_EMAIL = 'work@neoticai.com'
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'elena@neoticai.email')
+SENDER_NAME = os.environ.get('SENDER_NAME', 'Elena from NeoticAI')
+CC_EMAIL = os.environ.get('CC_EMAIL', 'work@neoticai.com')
 
-print(f"✓ SENDGRID_API_KEY loaded: {SENDGRID_API_KEY[:10]}...")
+# Validate required configuration
+if not SENDGRID_API_KEY:
+    print("⚠️ WARNING: SENDGRID_API_KEY not set. Email functionality will not work.")
+    print("Please set SENDGRID_API_KEY environment variable or create a .env file")
+else:
+    print(f"✓ SENDGRID_API_KEY loaded: {SENDGRID_API_KEY[:10]}...")
+
 print(f"✓ Sender: {SENDER_EMAIL}")
 print(f"✓ CC: {CC_EMAIL}")
 
@@ -38,6 +48,14 @@ def health_check():
 def send_email():
     """Send proposal email with PDF attachment"""
     try:
+        # Check if SendGrid API key is configured
+        if not SENDGRID_API_KEY:
+            return jsonify({
+                'success': False,
+                'message': 'SendGrid API key not configured. Please set SENDGRID_API_KEY environment variable.',
+                'error': 'Missing API key'
+            }), 500
+        
         data = request.json
         recipient_email = data.get('recipientEmail')
         proposal_data = data.get('proposalData')
