@@ -1099,4 +1099,280 @@
             }
         };
 
-        const addons =
+        const addons = [
+            {
+                name: 'Press Release Distribution',
+                price: 1200,
+                type: 'monthly',
+                description: 'Distribute professional press releases across major news wires and industry publications.'
+            },
+            {
+                name: 'Website Development',
+                price: 2500,
+                type: 'one-time',
+                description: 'Custom professional website design and development optimized for conversions and SEO.'
+            },
+            {
+                name: 'Content Creation Package',
+                price: 800,
+                type: 'monthly',
+                description: 'Professional blog posts, case studies, and whitepapers (4 pieces/month).'
+            },
+            {
+                name: 'PPC Advertising Management',
+                price: 1500,
+                type: 'monthly',
+                description: 'Google Ads and LinkedIn Ads management with $2,000 monthly ad spend (not included).'
+            },
+            {
+                name: 'SEO Optimization Package',
+                price: 1500,
+                type: 'monthly',
+                description: 'Comprehensive SEO services including keyword research, on-page optimization, and more.'
+            },
+            {
+                name: 'Intelligent Chatbot',
+                price: 200,
+                type: 'monthly',
+                description: 'AI-powered chatbot for website engagement and 24/7 customer support.'
+            }
+        ];
+
+        // Payment multipliers
+        const paymentMultipliers = {
+            monthly: { multiplier: 1, label: 'Monthly' },
+            quarterly: { multiplier: 3 * 0.95, label: 'Quarterly (5% discount)' },
+            'semi-annual': { multiplier: 6 * 0.90, label: 'Semi-Annual (10% discount)' },
+            annual: { multiplier: 12 * 0.85, label: 'Annual (15% discount)' }
+        };
+
+        // Event Listeners - Package Selection
+        document.querySelectorAll('.package-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedPackage = parseInt(this.dataset.price);
+                selectedPackageKey = this.dataset.key;
+                
+                // Enable add-ons section
+                document.getElementById('addonsSection').classList.add('active');
+                
+                updateTotal();
+                updateFinalizeButton();
+            });
+        });
+
+        // Event Listeners - Add-on Selection
+        document.querySelectorAll('.addon-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                const index = parseInt(this.dataset.index);
+                const addonPrice = parseInt(this.dataset.price);
+                
+                if (this.classList.contains('selected')) {
+                    selectedAddons.push({
+                        index: index,
+                        name: addons[index].name,
+                        price: addonPrice,
+                        type: addons[index].type
+                    });
+                } else {
+                    selectedAddons = selectedAddons.filter(a => a.index !== index);
+                }
+                
+                updateTotal();
+                updateFinalizeButton();
+            });
+        });
+
+        // Event Listeners - Payment Selection
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedPayment = this.dataset.payment;
+                updateTotal();
+                updateFinalizeButton();
+            });
+        });
+
+        // Clear Button
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            // Reset package selection
+            document.querySelectorAll('.package-card').forEach(c => c.classList.remove('selected'));
+            selectedPackage = null;
+            selectedPackageKey = null;
+            
+            // Reset add-ons
+            document.querySelectorAll('.addon-card').forEach(c => c.classList.remove('selected'));
+            selectedAddons = [];
+            document.getElementById('addonsSection').classList.remove('active');
+            
+            // Reset payment to monthly
+            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+            document.querySelector('.payment-option[data-payment="monthly"]').classList.add('selected');
+            selectedPayment = 'monthly';
+            
+            // Reset terms checkbox
+            document.getElementById('termsCheckbox').checked = false;
+            
+            // Reset buttons
+            document.getElementById('finalizeBtn').disabled = true;
+            document.getElementById('emailBtn').disabled = true;
+            document.getElementById('termsButtonSection').style.display = 'none';
+            
+            updateTotal();
+        });
+
+        // Terms Checkbox
+        document.getElementById('termsCheckbox').addEventListener('change', function() {
+            updateFinalizeButton();
+        });
+
+        // Finalize Button
+        document.getElementById('finalizeBtn').addEventListener('click', function() {
+            if (!selectedPackage) {
+                showToast('Please select a package first', 'warning');
+                return;
+            }
+            
+            document.getElementById('termsButtonSection').style.display = 'flex';
+            document.getElementById('emailBtn').disabled = false;
+            showToast('Selections finalized! You can now email the proposal.', 'success');
+        });
+
+        // Email Button
+        document.getElementById('emailBtn').addEventListener('click', function() {
+            document.getElementById('emailModal').style.display = 'flex';
+        });
+
+        // Close Modal
+        document.getElementById('closeModal').addEventListener('click', closeEmailModal);
+        document.getElementById('cancelBtn').addEventListener('click', closeEmailModal);
+
+        // Send Email
+        document.getElementById('sendBtn').addEventListener('click', async function() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const recipientEmail = document.getElementById('recipientEmail').value.trim();
+            
+            if (!firstName || !lastName || !recipientEmail) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (!recipientEmail.includes('@')) {
+                showToast('Please enter a valid email address', 'error');
+                return;
+            }
+
+            // Show loading state
+            const sendBtn = document.getElementById('sendBtn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            sendBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+
+            try {
+                const payload = {
+                    firstname: firstName,
+                    lastname: lastName,
+                    recipientEmail: recipientEmail,
+                    selectedPackage: selectedPackageKey,
+                    packageDetails: packageDetails[selectedPackageKey],
+                    selectedAddons: selectedAddons,
+                    selectedPayment: selectedPayment,
+                    totalAmount: totalAmount,
+                    clientName: `${firstName} ${lastName}`
+                };
+
+                const response = await fetch(`${BACKEND_URL}/api/send-proposal`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast('Proposal sent successfully! Check your email.', 'success');
+                    closeEmailModal();
+                    // Clear form
+                    document.getElementById('firstName').value = '';
+                    document.getElementById('lastName').value = '';
+                    document.getElementById('recipientEmail').value = '';
+                } else {
+                    showToast(data.error || 'Failed to send email. Please try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Email send error:', error);
+                showToast('Network error. Please check your connection and try again.', 'error');
+            } finally {
+                sendBtn.disabled = false;
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Helper Functions
+        function updateTotal() {
+            let monthlyBase = selectedPackage || 0;
+            let monthlyAddons = 0;
+            let oneTimeAddons = 0;
+
+            selectedAddons.forEach(addon => {
+                if (addon.type === 'monthly') {
+                    monthlyAddons += addon.price;
+                } else {
+                    oneTimeAddons += addon.price;
+                }
+            });
+
+            const monthlyTotal = monthlyBase + monthlyAddons;
+            const multiplier = paymentMultipliers[selectedPayment].multiplier;
+            totalAmount = Math.round(monthlyTotal * multiplier + oneTimeAddons);
+
+            // Update header
+            const packageName = selectedPackageKey ? packageDetails[selectedPackageKey].name : 'None Selected';
+            document.getElementById('header-package').textContent = packageName;
+            document.getElementById('header-amount').textContent = `$${totalAmount.toLocaleString()}`;
+            document.getElementById('header-payment').textContent = paymentMultipliers[selectedPayment].label;
+
+            // Update mobile footer
+            document.getElementById('mobile-total').textContent = 
+                `Total: $${totalAmount.toLocaleString()} | ${packageName}`;
+        }
+
+        function updateFinalizeButton() {
+            const hasPackage = selectedPackage !== null;
+            const hasAgreed = document.getElementById('termsCheckbox').checked;
+            document.getElementById('finalizeBtn').disabled = !(hasPackage && hasAgreed);
+        }
+
+        function closeEmailModal() {
+            document.getElementById('emailModal').style.display = 'none';
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Close modal on outside click
+        document.getElementById('emailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEmailModal();
+            }
+        });
+
+        // Initialize
+        updateTotal();
+    </script>
+</body>
+</html>
