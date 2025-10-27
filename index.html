@@ -1261,7 +1261,9 @@
                 return;
             }
             
-            if (!recipientEmail.includes('@')) {
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(recipientEmail)) {
                 showToast('Please enter a valid email address', 'error');
                 return;
             }
@@ -1330,7 +1332,7 @@
 
             const monthlyTotal = monthlyBase + monthlyAddons;
             const multiplier = paymentMultipliers[selectedPayment].multiplier;
-            totalAmount = Math.round(monthlyTotal * multiplier + oneTimeAddons);
+            totalAmount = Math.round(monthlyTotal * multiplier) + oneTimeAddons;
 
             // Update header
             const packageName = selectedPackageKey ? packageDetails[selectedPackageKey].name : 'None Selected';

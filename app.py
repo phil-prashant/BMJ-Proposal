@@ -189,7 +189,11 @@ def send_proposal():
 
         # Add CC if configured and different from sender
         if cc_email and cc_email != from_email:
-            message.cc = Cc(cc_email)
+            # Validate CC email format
+            if '@' in cc_email and '.' in cc_email:
+                message.cc = Cc(cc_email)
+            else:
+                print(f"Warning: Invalid CC email format '{cc_email}', skipping CC")
 
         # Attach PDF
         attachment = Attachment(
